@@ -1,12 +1,14 @@
 package com.codecool.quest.logic;
 
 
+import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Key;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.items.Sword;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MapLoader {
@@ -19,6 +21,8 @@ public class MapLoader {
         scanner.nextLine(); // empty line
 
         GameMap map = new GameMap(width, height, CellType.EMPTY);
+
+        ArrayList<Item> inventory = new ArrayList<>();
         for (int y = 0; y < height; y++) {
             String line = scanner.nextLine();
             for (int x = 0; x < width; x++) {
@@ -40,7 +44,7 @@ public class MapLoader {
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);
-                            map.setPlayer(new Player(cell));
+                            map.setPlayer(new Player(cell, inventory));
                             break;
                         case 'k':
                             cell.setType(CellType.FLOOR);

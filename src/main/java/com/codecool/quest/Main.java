@@ -3,6 +3,7 @@ package com.codecool.quest;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
+import com.codecool.quest.logic.actors.Actor;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -13,8 +14,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import com.codecool.quest.logic.actors.Player;
 
 public class Main extends Application {
     GameMap map = MapLoader.loadMap();
@@ -25,19 +28,22 @@ public class Main extends Application {
     Label healthLabel = new Label();
 
 
+
+
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         GridPane ui = new GridPane();
         ui.setPrefWidth(200);
         ui.setPadding(new Insets(10));
 
         ui.add(new Label("Health: "), 0, 0);
         ui.add(healthLabel, 1, 0);
-
 
 
         BorderPane borderPane = new BorderPane();
@@ -83,6 +89,13 @@ public class Main extends Application {
                 Cell cell = map.getCell(x, y);
                 if (cell.getActor() != null) {
                     Tiles.drawTile(context, cell.getActor(), x, y);
+                    if (cell.getItem() != null){
+                        System.out.println(map.getCell(x, y));
+                        System.out.println(map.getCell(x, y).getItem());
+                        map.getPlayer().addItem(cell.getItem());
+                        cell.deleteItem();
+                        System.out.println(map.getPlayer().inventory);
+                    }
                 } else if (cell.getItem() != null){
                     Tiles.drawTile(context, cell.getItem(), x, y);
                 } else {

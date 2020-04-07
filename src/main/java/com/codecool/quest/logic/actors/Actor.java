@@ -2,6 +2,7 @@ package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.Drawable;
+import com.codecool.quest.logic.items.Key;
 
 public abstract class Actor implements Drawable {
     private Cell cell;
@@ -14,7 +15,7 @@ public abstract class Actor implements Drawable {
 
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if(nextCell != null) {
+        if (nextCell != null) {
             if (validateCell(nextCell) && nextCell.getActor() == null) {
                 cell.setActor(null);
                 nextCell.setActor(this);
@@ -22,6 +23,8 @@ public abstract class Actor implements Drawable {
             }
         }
     }
+
+
 
     public int getHealth() {
         return health;
@@ -39,7 +42,7 @@ public abstract class Actor implements Drawable {
         return cell.getY();
     }
 
-    public boolean validateCell(Cell cell){
+    public boolean validateCell(Cell cell) {
         return cell.getType().toString().equals("FLOOR");
     }
 }
