@@ -4,6 +4,7 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.actors.Actor;
+import com.codecool.quest.logic.items.Item;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -19,6 +20,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import com.codecool.quest.logic.actors.Player;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Main extends Application {
     GameMap map = MapLoader.loadMap();
     Canvas canvas = new Canvas(
@@ -26,9 +31,7 @@ public class Main extends Application {
             map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
-
-
-
+    ArrayList<String> listView = new ArrayList<>();
 
 
     public static void main(String[] args) {
@@ -44,7 +47,8 @@ public class Main extends Application {
 
         ui.add(new Label("Health: "), 0, 0);
         ui.add(healthLabel, 1, 0);
-
+        ui.setVgap(50);
+        ui.add(new Label("Inventory: "), 0, 1);
 
         BorderPane borderPane = new BorderPane();
 
@@ -75,7 +79,7 @@ public class Main extends Application {
                 refresh();
                 break;
             case RIGHT:
-                map.getPlayer().move(1,0);
+                map.getPlayer().move(1, 0);
                 refresh();
                 break;
         }
@@ -89,14 +93,11 @@ public class Main extends Application {
                 Cell cell = map.getCell(x, y);
                 if (cell.getActor() != null) {
                     Tiles.drawTile(context, cell.getActor(), x, y);
-                    if (cell.getItem() != null){
-                        System.out.println(map.getCell(x, y));
-                        System.out.println(map.getCell(x, y).getItem());
+                    if (cell.getItem() != null) {
                         map.getPlayer().addItem(cell.getItem());
                         cell.deleteItem();
-                        System.out.println(map.getPlayer().inventory);
                     }
-                } else if (cell.getItem() != null){
+                } else if (cell.getItem() != null) {
                     Tiles.drawTile(context, cell.getItem(), x, y);
                 } else {
                     Tiles.drawTile(context, cell, x, y);

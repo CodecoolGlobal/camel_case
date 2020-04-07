@@ -14,9 +14,9 @@ public class Player extends Actor {
 
     boolean godMode;
     String name;
-    public ArrayList<Item> inventory;
+    public ListView<Item> inventory;
 
-    public Player(Cell cell, ArrayList<Item> inventory) {
+    public Player(Cell cell, ListView<Item> inventory) {
         super(cell);
         this.inventory = inventory;
 
@@ -32,12 +32,12 @@ public class Player extends Actor {
     }
 
     public void addItem(Item item){
-        System.out.println(item);
-        System.out.println(this.inventory);
-        this.inventory.add(item);
+        this.inventory.getItems().add(item);
     }
-
+/*
     public void deleteItem(Item item){
         this.inventory.remove(item);
     }
+
+ */
 }
