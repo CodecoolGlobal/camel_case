@@ -9,6 +9,7 @@ public class GameMap {
 
     private Player player;
 
+
     public GameMap(int width, int height, CellType defaultCellType) {
         this.width = width;
         this.height = height;
