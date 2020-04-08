@@ -48,12 +48,16 @@ public class Main extends Application {
 
         int rowIndex = 0;
 
+
         Label nameLbl = new Label("Name: ");
         Label inventoryLbl = new Label("Inventory: ");
-        TextField name = new TextField();
+        TextField nameInput = new TextField();
         Button b = new Button("Submit");
-        name.setDisable(true);
-        b.setDisable(true);
+        b.setOnAction((e -> {
+            map.getPlayer().setGodMode(nameInput.getText());
+            nameInput.setDisable(true);
+            b.setDisable(true);
+        }));
 
         String IMAGE_FOLDER = System.getenv("IMAGE_FOLDER");
         FileInputStream input = new FileInputStream(IMAGE_FOLDER + "/key.png");
@@ -77,7 +81,7 @@ public class Main extends Application {
 
         ui.setBackground(new Background(new BackgroundFill(Color.DARKSLATEGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
         ui.add(nameLbl, 0, rowIndex++);
-        ui.add(name, 0, rowIndex++);
+        ui.add(nameInput, 0, rowIndex++);
         ui.add(b, 0 ,rowIndex++);
         ui.setVgap(30);
         ui.add(healthLabel, 0, rowIndex++);
@@ -107,19 +111,19 @@ public class Main extends Application {
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
-                map.getPlayer().move(0, -1);
+                map.getPlayer().move(0, -1, map.getPlayer().isGodMode());
                 refresh();
                 break;
             case DOWN:
-                map.getPlayer().move(0, 1);
+                map.getPlayer().move(0, 1, map.getPlayer().isGodMode());
                 refresh();
                 break;
             case LEFT:
-                map.getPlayer().move(-1, 0);
+                map.getPlayer().move(-1, 0, map.getPlayer().isGodMode());
                 refresh();
                 break;
             case RIGHT:
-                map.getPlayer().move(1, 0);
+                map.getPlayer().move(1, 0, map.getPlayer().isGodMode());
                 refresh();
                 break;
             case SPACE:

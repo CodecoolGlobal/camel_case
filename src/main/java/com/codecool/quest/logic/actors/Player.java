@@ -30,9 +30,14 @@ public class Player extends Actor {
         return "player";
     }
 
-    public boolean validateMode(String name) {
+    public void setGodMode(String name) {
+        System.out.println(name);
         List<String> developerNames = new ArrayList<>(Arrays.asList("Edit", "Vivien", "Tomi", "Kornél"));
-        return developerNames.contains(name);
+        this.godMode = developerNames.contains(name);
+    }
+
+    public boolean isGodMode() {
+        return this.godMode;
     }
 
     public void addItemToInventory(Item item) {
