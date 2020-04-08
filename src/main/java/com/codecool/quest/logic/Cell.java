@@ -25,16 +25,28 @@ public class Cell implements Drawable {
         this.type = type;
     }
 
-    public void setActor(Actor actor) {
-        this.actor = actor;
-    }
-
     public Actor getActor() {
         return actor;
     }
 
-    public void deleteActor() {
+    public void setActor(Actor actor) {
+        this.actor = actor;
+    }
+
+    public void removeActor() {
         this.actor = null;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    public void removeItem() {
+        this.item = null;
     }
 
     public Cell getNeighbor(int dx, int dy) {
@@ -46,23 +58,6 @@ public class Cell implements Drawable {
 
     }
 
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
-    public void deleteItem() {
-        this.item = null;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    @Override
-    public String getTileName() {
-        return type.getTileName();
-    }
-
     public int getX() {
         return x;
     }
@@ -70,4 +65,10 @@ public class Cell implements Drawable {
     public int getY() {
         return y;
     }
+
+    @Override
+    public String getTileName() {
+        return type.getTileName();
+    }
+
 }

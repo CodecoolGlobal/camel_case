@@ -1,9 +1,7 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.items.Item;
-import com.codecool.quest.logic.items.Sword;
 import javafx.scene.control.ListView;
 
 import java.util.ArrayList;
@@ -12,9 +10,9 @@ import java.util.List;
 
 public class Player extends Actor {
 
-    boolean godMode;
-    String name;
-    public ListView<Item> inventory;
+    private boolean godMode;
+    private String name;
+    private ListView<Item> inventory;
 
     public Player(Cell cell, ListView<Item> inventory, int health, int attackDamage) {
         super(cell);
@@ -32,7 +30,25 @@ public class Player extends Actor {
         return developerNames.contains(name);
     }
 
-    public void addItem(Item item) {
+    public void addToInventory(Item item) {
         this.inventory.getItems().add(item);
     }
+
+    public void removeFromInventory(Item item) {
+        this.inventory.getItems().remove(item);
+    }
+
+    public ListView<Item> getInventory() {
+        return this.inventory;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+
 }

@@ -3,41 +3,30 @@ package com.codecool.quest;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
-import com.codecool.quest.logic.actors.Actor;
-import com.codecool.quest.logic.items.Item;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import com.codecool.quest.logic.actors.Player;
-
-import java.rmi.server.Skeleton;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Main extends Application {
     GameMap map = MapLoader.loadMap();
     Canvas canvas = new Canvas(map.getWidth() * Tiles.TILE_WIDTH, map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
-    ArrayList<String> listView = new ArrayList<>();
 
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
 
         GridPane ui = new GridPane();
         ui.setPrefWidth(200);
@@ -63,7 +52,6 @@ public class Main extends Application {
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
-
         switch (keyEvent.getCode()) {
             case UP:
                 map.getPlayer().move(0, -1);
@@ -82,16 +70,20 @@ public class Main extends Application {
                 refresh();
                 break;
             case SPACE:
-                Cell cellToAttack = map.getPlayer().isEnemyNearby();
-                if (cellToAttack != null) {
-                    map.getPlayer().attack(cellToAttack);
-                    if (cellToAttack.getActor().getHealth() > 0) {
-                        Cell playerCell = map.getPlayer().getCell();
-                        cellToAttack.getActor().attack(playerCell);
-                    }
-                }
+                handleAttack();
                 refresh();
                 break;
+        }
+    }
+
+    private void handleAttack() {
+        Cell cellToAttack = map.getPlayer().getNeighborEnemyCell();
+        if (cellToAttack != null) {
+            map.getPlayer().attack(cellToAttack);
+            if (cellToAttack.getActor().getHealth() > 0) {
+                Cell playerCell = map.getPlayer().getCell();
+                cellToAttack.getActor().attack(playerCell);
+            }
         }
     }
 
@@ -105,12 +97,12 @@ public class Main extends Application {
                     if (cell.getActor().getHealth() > 0) {
                         Tiles.drawTile(context, cell.getActor(), x, y);
                     } else {
-                        cell.setActor(null);
+                        cell.removeActor();
                         Tiles.drawTile(context, cell, x, y);
                     }
                     if (cell.getItem() != null) {
-                        map.getPlayer().addItem(cell.getItem());
-                        cell.deleteItem();
+                        map.getPlayer().addToInventory(cell.getItem());
+                        cell.removeItem();
                     }
                 } else if (cell.getItem() != null) {
                     Tiles.drawTile(context, cell.getItem(), x, y);
