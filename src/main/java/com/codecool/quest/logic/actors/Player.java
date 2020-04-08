@@ -31,7 +31,7 @@ public class Player extends Actor {
     }
 
     public void setGodMode(String name) {
-        System.out.println(name);
+
         List<String> developerNames = new ArrayList<>(Arrays.asList("Edit", "Vivien", "Tomi", "Kornél"));
         this.godMode = developerNames.contains(name);
     }
