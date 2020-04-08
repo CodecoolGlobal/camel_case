@@ -2,6 +2,7 @@ package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.items.Item;
+import com.codecool.quest.logic.items.Sword;
 import javafx.scene.control.ListView;
 
 import java.util.ArrayList;
@@ -30,8 +31,21 @@ public class Player extends Actor {
         return developerNames.contains(name);
     }
 
-    public void addToInventory(Item item) {
+    public void addItemToInventory(Item item) {
         this.inventory.getItems().add(item);
+    }
+
+    public void addWeaponToInventory(Sword sword) {
+        this.inventory.getItems().add(sword);
+        updateAttackDamage(sword.getAttackDamage());
+    }
+
+    public boolean isWeapon(Item item){
+        return item.getTileName().equals("sword");
+    }
+
+    public void updateAttackDamage(int damageModifier){
+        this.setAttackDamage(this.getAttackDamage() + damageModifier);
     }
 
     public void removeFromInventory(Item item) {
@@ -49,6 +63,7 @@ public class Player extends Actor {
     public String getName() {
         return this.name;
     }
+
 
 
 }

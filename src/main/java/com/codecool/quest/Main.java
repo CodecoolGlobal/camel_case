@@ -3,6 +3,7 @@ package com.codecool.quest;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
+import com.codecool.quest.logic.items.Sword;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -100,8 +101,12 @@ public class Main extends Application {
                         cell.removeActor();
                         Tiles.drawTile(context, cell, x, y);
                     }
-                    if (cell.getItem() != null) {
-                        map.getPlayer().addToInventory(cell.getItem());
+                    if (cell.getItem() != null && cell.getItem().getTileName().equals("sword")) {
+                        Sword sword = (Sword) cell.getItem();
+                        map.getPlayer().addWeaponToInventory(sword);
+                        cell.removeItem();
+                    } else if (cell.getItem() != null) {
+                        map.getPlayer().addItemToInventory(cell.getItem());
                         cell.removeItem();
                     }
                 } else if (cell.getItem() != null) {
