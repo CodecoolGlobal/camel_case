@@ -5,6 +5,7 @@ import com.codecool.quest.logic.Drawable;
 
 public abstract class Item implements Drawable{
 
+
     private Cell cell;
 
     public Item(Cell cell){
@@ -15,9 +16,6 @@ public abstract class Item implements Drawable{
     public void pickUp(){
 
     }
-
-
-
 
 
 }
