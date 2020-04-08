@@ -16,9 +16,9 @@ public class Player extends Actor {
 
     boolean godMode;
     String name;
-    public ArrayList<String> inventory = new ArrayList<String>();
+    public ListView<Item> inventory;
 
-    public Player(Cell cell, ArrayList<String> inventory) {
+    public Player(Cell cell, ListView<Item> inventory, int health, int attackDamage) {
         super(cell);
         this.inventory = inventory;
         this.setHealth(health);
@@ -35,34 +35,19 @@ public class Player extends Actor {
         return developerNames.contains(name);
     }
 
-    public void addItem(Item item){
-        this.inventory.add(item.getTileName());
-        if (item.getTileName().equals("sword")){
-            this.sword += 1;
-        }else if (item.getTileName().equals("key")){
-            this.key += 1;
-        }
+    public void addItemToInventory(Item item) {
+        this.inventory.getItems().add(item);
+        this.key += 1;
     }
-/*
+
     public void addWeaponToInventory(Sword sword) {
-        this.inventory.add(sword);
+        this.inventory.getItems().add(sword);
+        this.sword += 1;
         updateAttackDamage(sword.getAttackDamage());
     }
 
-    public boolean isWeapon(Item item){
-        return item.getTileName().equals("sword");
-    }
-
-    public void updateAttackDamage(int damageModifier){
+    public void updateAttackDamage(int damageModifier) {
         this.setAttackDamage(this.getAttackDamage() + damageModifier);
-    }
-
-    public void removeFromInventory(Item item) {
-        this.inventory.remove(item);
-    }
-*/
-    public ArrayList<String> getInventory() {
-        return this.inventory;
     }
 
     public void setName(String name) {
@@ -72,7 +57,6 @@ public class Player extends Actor {
     public String getName() {
         return this.name;
     }
-
 
 
 }

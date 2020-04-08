@@ -8,8 +8,6 @@ import com.codecool.quest.logic.items.Sword;
 import javafx.scene.control.ListView;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class MapLoader {
@@ -23,7 +21,7 @@ public class MapLoader {
 
         GameMap map = new GameMap(width, height, CellType.EMPTY);
 
-        ArrayList<String> inventory = new ArrayList<String>();
+        ListView<Item> inventory = new ListView<>();
         for (int y = 0; y < height; y++) {
             String line = scanner.nextLine();
             for (int x = 0; x < width; x++) {

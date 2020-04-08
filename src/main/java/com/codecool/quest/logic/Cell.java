@@ -1,8 +1,7 @@
 package com.codecool.quest.logic;
 
-import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.actors.Actor;
-import com.codecool.quest.logic.items.Sword;
+import com.codecool.quest.logic.items.Item;
 
 public class Cell implements Drawable {
     private CellType type;

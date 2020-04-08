@@ -11,26 +11,18 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import com.codecool.quest.logic.actors.Player;
 
-import java.awt.*;
 import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.io.FileNotFoundException;
 
 public class Main extends Application {
     GameMap map = MapLoader.loadMap();
@@ -48,7 +40,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws FileNotFoundException {
 
         GridPane ui = new GridPane();
         ui.setPrefWidth(200);
@@ -63,11 +55,12 @@ public class Main extends Application {
         name.setDisable(true);
         b.setDisable(true);
 
-        FileInputStream input = new FileInputStream("/home/edit/codecool/oop/2TW/codecoolQuest/src/main/resources/images/key.png");
+        String IMAGE_FOLDER = System.getenv("IMAGE_FOLDER");
+        FileInputStream input = new FileInputStream(IMAGE_FOLDER + "/key.png");
         Image image = new Image(input);
         ImageView imageView = new ImageView(image);
 
-        FileInputStream input2 = new FileInputStream("/home/edit/codecool/oop/2TW/codecoolQuest/src/main/resources/images/sword.png");
+        FileInputStream input2 = new FileInputStream(IMAGE_FOLDER + "/sword.png");
         Image image2 = new Image(input2);
         ImageView imageView2 = new ImageView(image2);
 
