@@ -11,16 +11,20 @@ import java.util.List;
 
 public class Player extends Actor {
 
-    private boolean godMode;
-    private String name;
-    private ListView<Item> inventory;
+    public int key = 0;
+    public int sword = 0;
 
-    public Player(Cell cell, ListView<Item> inventory, int health, int attackDamage) {
+    boolean godMode;
+    String name;
+    public ArrayList<String> inventory = new ArrayList<String>();
+
+    public Player(Cell cell, ArrayList<String> inventory) {
         super(cell);
         this.inventory = inventory;
         this.setHealth(health);
         this.setAttackDamage(attackDamage);
     }
+
 
     public String getTileName() {
         return "player";
@@ -31,12 +35,17 @@ public class Player extends Actor {
         return developerNames.contains(name);
     }
 
-    public void addItemToInventory(Item item) {
-        this.inventory.getItems().add(item);
+    public void addItem(Item item){
+        this.inventory.add(item.getTileName());
+        if (item.getTileName().equals("sword")){
+            this.sword += 1;
+        }else if (item.getTileName().equals("key")){
+            this.key += 1;
+        }
     }
-
+/*
     public void addWeaponToInventory(Sword sword) {
-        this.inventory.getItems().add(sword);
+        this.inventory.add(sword);
         updateAttackDamage(sword.getAttackDamage());
     }
 
@@ -49,10 +58,10 @@ public class Player extends Actor {
     }
 
     public void removeFromInventory(Item item) {
-        this.inventory.getItems().remove(item);
+        this.inventory.remove(item);
     }
-
-    public ListView<Item> getInventory() {
+*/
+    public ArrayList<String> getInventory() {
         return this.inventory;
     }
 
