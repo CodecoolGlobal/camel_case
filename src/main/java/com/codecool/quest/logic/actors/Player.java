@@ -16,10 +16,11 @@ public class Player extends Actor {
     String name;
     public ListView<Item> inventory;
 
-    public Player(Cell cell, ListView<Item> inventory) {
-        super(cell, 2);
+    public Player(Cell cell, ListView<Item> inventory, int health, int attackDamage) {
+        super(cell);
         this.inventory = inventory;
-
+        this.setHealth(health);
+        this.setAttackDamage(attackDamage);
     }
 
     public String getTileName() {

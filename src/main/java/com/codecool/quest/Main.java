@@ -82,7 +82,14 @@ public class Main extends Application {
                 refresh();
                 break;
             case SPACE:
-                map.getPlayer().isEnemyNearby();
+                Cell cellToAttack = map.getPlayer().isEnemyNearby();
+                if (cellToAttack != null){
+                    map.getPlayer().attack(cellToAttack);
+                    if (cellToAttack.getActor().getHealth() > 0){
+                        Cell playerCell = map.getPlayer().getCell();
+                        cellToAttack.getActor().attack(playerCell);
+                    }
+                }
                 refresh();
                 break;
         }

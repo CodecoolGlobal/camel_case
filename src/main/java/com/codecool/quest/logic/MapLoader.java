@@ -40,11 +40,11 @@ public class MapLoader {
                             break;
                         case 's':
                             cell.setType(CellType.FLOOR);
-                            new Skeleton(cell, 5);
+                            new Skeleton(cell, 5, 2);
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);
-                            map.setPlayer(new Player(cell, inventory));
+                            map.setPlayer(new Player(cell, inventory, 10, 2));
                             break;
                         case 'k':
                             cell.setType(CellType.FLOOR);

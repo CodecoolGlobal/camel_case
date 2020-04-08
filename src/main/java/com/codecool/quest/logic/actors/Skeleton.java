@@ -5,13 +5,12 @@ import com.codecool.quest.logic.actors.Actor;
 
 public class Skeleton extends Actor {
 
-    private int healthPoints;
-
-    public Skeleton(Cell cell, int healthPoints) {
-        super(cell, 1);
-        this.healthPoints = healthPoints;
+    public Skeleton(Cell cell, int health, int attackDamage) {
+        super(cell);
+        this.setHealth(health);
+        this.setAttackDamage(attackDamage);
     }
-
+    
     @Override
     public String getTileName() {
         return "skeleton";
