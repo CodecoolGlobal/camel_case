@@ -17,7 +17,7 @@ public class Player extends Actor {
     public ListView<Item> inventory;
 
     public Player(Cell cell, ListView<Item> inventory) {
-        super(cell);
+        super(cell, 2);
         this.inventory = inventory;
 
     }
@@ -31,13 +31,7 @@ public class Player extends Actor {
         return developerNames.contains(name);
     }
 
-    public void addItem(Item item){
+    public void addItem(Item item) {
         this.inventory.getItems().add(item);
     }
-/*
-    public void deleteItem(Item item){
-        this.inventory.remove(item);
-    }
-
- */
 }

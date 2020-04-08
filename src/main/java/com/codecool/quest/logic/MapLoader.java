@@ -1,6 +1,5 @@
 package com.codecool.quest.logic;
 
-
 import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Key;
 import com.codecool.quest.logic.actors.Player;
@@ -41,7 +40,7 @@ public class MapLoader {
                             break;
                         case 's':
                             cell.setType(CellType.FLOOR);
-                            new Skeleton(cell);
+                            new Skeleton(cell, 5);
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);

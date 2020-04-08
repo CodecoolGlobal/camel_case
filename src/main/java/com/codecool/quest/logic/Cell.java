@@ -1,4 +1,5 @@
 package com.codecool.quest.logic;
+
 import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.actors.Actor;
 
@@ -8,7 +9,6 @@ public class Cell implements Drawable {
     private GameMap gameMap;
     private int x, y;
     private Item item;
-
 
     Cell(GameMap gameMap, int x, int y, CellType type) {
         this.gameMap = gameMap;
@@ -33,27 +33,30 @@ public class Cell implements Drawable {
         return actor;
     }
 
+    public void deleteActor() {
+        this.actor = null;
+    }
+
     public Cell getNeighbor(int dx, int dy) {
-        try{
+        try {
             return gameMap.getCell(x + dx, y + dy);
-        } catch (ArrayIndexOutOfBoundsException a){
+        } catch (ArrayIndexOutOfBoundsException a) {
             return null;
         }
 
     }
 
-    public void setItem(Item item){
+    public void setItem(Item item) {
         this.item = item;
     }
 
-    public void deleteItem(){
+    public void deleteItem() {
         this.item = null;
     }
 
-    public Item getItem(){
+    public Item getItem() {
         return item;
     }
-
 
     @Override
     public String getTileName() {

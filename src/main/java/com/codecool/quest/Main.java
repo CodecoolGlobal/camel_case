@@ -20,19 +20,17 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import com.codecool.quest.logic.actors.Player;
 
+import java.rmi.server.Skeleton;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Main extends Application {
     GameMap map = MapLoader.loadMap();
-    Canvas canvas = new Canvas(
-            map.getWidth() * Tiles.TILE_WIDTH,
-            map.getHeight() * Tiles.TILE_WIDTH);
+    Canvas canvas = new Canvas(map.getWidth() * Tiles.TILE_WIDTH, map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
     ArrayList<String> listView = new ArrayList<>();
-
 
     public static void main(String[] args) {
         launch(args);
@@ -65,6 +63,7 @@ public class Main extends Application {
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
+
         switch (keyEvent.getCode()) {
             case UP:
                 map.getPlayer().move(0, -1);
@@ -82,6 +81,10 @@ public class Main extends Application {
                 map.getPlayer().move(1, 0);
                 refresh();
                 break;
+            case SPACE:
+                map.getPlayer().isEnemyNearby();
+                refresh();
+                break;
         }
     }
 
@@ -92,7 +95,12 @@ public class Main extends Application {
             for (int y = 0; y < map.getHeight(); y++) {
                 Cell cell = map.getCell(x, y);
                 if (cell.getActor() != null) {
-                    Tiles.drawTile(context, cell.getActor(), x, y);
+                    if (cell.getActor().getHealth() > 0) {
+                        Tiles.drawTile(context, cell.getActor(), x, y);
+                    } else {
+                        cell.setActor(null);
+                        Tiles.drawTile(context, cell, x, y);
+                    }
                     if (cell.getItem() != null) {
                         map.getPlayer().addItem(cell.getItem());
                         cell.deleteItem();
