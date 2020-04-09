@@ -1,0 +1,36 @@
+#+OPTIONS: toc:nil num:nil ^:nil
+#+TITLE: 2ns TW week notes
+#+AUTHOR: Bence Fábián <begnoc@gmail.com>
+
+
+* Refactor example
+
+  #+BEGIN_SRC diff
+    @@ -57,10 +57,11 @@ public abstract class Actor implements Drawable {
+
+         public Cell getNeighborEnemyCell() {
+             int[][] coordinateModifiers = {{0, 1}, {1, 0}, {-1, 0}, {0, -1}};
+             for (int[] modifier : coordinateModifiers) {
+    -            if (cell.getNeighbor(modifier[0], modifier[1]).getActor() != null) {
+    -                return cell.getNeighbor(modifier[0], modifier[1]);
+    +            var neighbourCell = cell.getNeighbor(modifier[0], modifier[1]);
+    +            if (neighbourCell.hasActor()) {
+    +                return neighbourCell;
+                 }
+             }
+             return null;
+         }
+  #+END_SRC
+
+* Inventory view
+
+  Use a new class for the elements of the inventory list:
+  #+BEGIN_SRC java
+    class InventorySlot {
+        private Item item;
+        private int amount;
+    }
+  #+END_SRC
+
+  *Note:* Most likely this will need to extend or implement something
+  so JavaFX will know how to display it.
