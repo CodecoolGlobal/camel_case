@@ -13,6 +13,7 @@ public abstract class Actor implements Drawable {
         this.cell.setActor(this);
     }
 
+
     public void move(int dx, int dy, boolean godMode) {
         Cell nextCell = cell.getNeighbor(dx, dy);
         if (nextCell != null) {

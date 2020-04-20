@@ -3,75 +3,209 @@
   <ID>JAVA</ID>
   <OriginalElement>com.codecool.quest</OriginalElement>
   <nodes>
-    <node x="154.0" y="583.0">com.codecool.quest.logic.items.Sword</node>
-    <node x="565.0" y="842.0">com.codecool.quest.logic.CellType</node>
-    <node x="641.5" y="486.0">com.codecool.quest.logic.actors.Player</node>
-    <node x="1127.0" y="189.0">com.codecool.quest.Tiles.Tile</node>
-    <node x="0.0" y="842.0">com.codecool.quest.Main</node>
-    <node x="531.78125" y="113.0">com.codecool.quest.logic.actors.Actor</node>
-    <node x="401.5" y="594.0">com.codecool.quest.logic.actors.Skeleton</node>
-    <node x="228.78125" y="103.0">com.codecool.quest.logic.Cell</node>
-    <node x="307.0" y="0.0">com.codecool.quest.logic.Drawable</node>
-    <node x="279.0" y="842.0">com.codecool.quest.logic.GameMap</node>
-    <node x="774.0" y="842.0">com.codecool.quest.logic.ActorTest</node>
-    <node x="1004.5" y="0.0">com.codecool.quest.Tiles</node>
-    <node x="86.78125" y="243.0">com.codecool.quest.logic.items.Item</node>
-    <node x="0.0" y="1180.0">com.codecool.quest.logic.MapLoader</node>
-    <node x="0.0" y="594.0">com.codecool.quest.logic.items.Key</node>
-    <node x="1095.0" y="842.0">com.codecool.quest.logic.CellTest</node>
+    <node x="509.7421411482362" y="650.7355168143798">com.codecool.quest.logic.items.Sword</node>
+    <node x="0.0" y="1355.444486394167">com.codecool.quest.logic.actors.Player</node>
+    <node x="1333.0002333419295" y="1566.3731241554397">com.codecool.quest.logic.CellType</node>
+    <node x="792.7311804200225" y="45.78269230769231">com.codecool.quest.Tiles.Tile</node>
+    <node x="1101.1834924054074" y="671.0731827068087">com.codecool.quest.Main</node>
+    <node x="54.417481062427214" y="951.7064353428783">com.codecool.quest.logic.actors.Actor</node>
+    <node x="431.7856914042958" y="1937.3857634662622">com.codecool.quest.logic.actors.Skeleton</node>
+    <node x="718.4540992778457" y="1873.5954581671504">com.codecool.quest.logic.Cell</node>
+    <node x="243.436781456159" y="851.7401804599111">com.codecool.quest.logic.Drawable</node>
+    <node x="1317.7576145517198" y="986.3666516803561">com.codecool.quest.logic.GameMap</node>
+    <node x="174.71150435860602" y="1752.2962065745332">com.codecool.quest.logic.ActorTest</node>
+    <node x="703.5536243388582" y="610.0816398641152">com.codecool.quest.Tiles</node>
+    <node x="366.07035574308384" y="757.3714786989187">com.codecool.quest.logic.items.Item</node>
+    <node x="1189.9866914971753" y="1814.1025291698672">com.codecool.quest.logic.MapLoader</node>
+    <node x="1063.2656440507403" y="1906.4760415446626">com.codecool.quest.logic.items.Key</node>
+    <node x="1354.4399833180196" y="1338.8993940879407">com.codecool.quest.logic.CellTest</node>
   </nodes>
   <notes />
   <edges>
+    <edge source="com.codecool.quest.logic.MapLoader" target="com.codecool.quest.logic.GameMap">
+      <point x="-4.904517353915253" y="-0.972475976641249" />
+      <point x="-4.904517353915253" y="-0.972475976641249" />
+    </edge>
+    <edge source="com.codecool.quest.Tiles" target="com.codecool.quest.Tiles.Tile">
+      <point x="-10.055082795635165" y="0.0" />
+      <point x="-10.055082795635172" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.logic.GameMap" target="com.codecool.quest.logic.CellType">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.logic.actors.Player" target="com.codecool.quest.logic.Cell">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
     <edge source="com.codecool.quest.Tiles.Tile" target="com.codecool.quest.Tiles">
-      <point x="0.0" y="-80.5" />
-      <point x="0.0" y="69.5" />
+      <point x="20.110165591270288" y="0.0" />
+      <point x="20.11016559127033" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.logic.MapLoader" target="com.codecool.quest.logic.items.Sword">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.logic.MapLoader" target="com.codecool.quest.logic.actors.Player">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.logic.items.Key" target="com.codecool.quest.logic.Cell">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.logic.GameMap" target="com.codecool.quest.logic.actors.Player">
+      <point x="0.0" y="-5.247551782116773" />
+      <point x="0.0" y="-5.247551782116773" />
+    </edge>
+    <edge source="com.codecool.quest.logic.MapLoader" target="com.codecool.quest.logic.actors.Skeleton">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.logic.actors.Player" target="com.codecool.quest.logic.items.Item">
+      <point x="-4.628556666514214" y="-1.8911539294479667" />
+      <point x="-4.628556666514271" y="-1.8911539294479098" />
+    </edge>
+    <edge source="com.codecool.quest.logic.CellTest" target="com.codecool.quest.logic.CellType">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
     </edge>
     <edge source="com.codecool.quest.logic.items.Item" target="com.codecool.quest.logic.Drawable">
-      <point x="0.0" y="-26.5" />
-      <point x="147.78125" y="78.0" />
-      <point x="329.3333333333333" y="78.0" />
-      <point x="-44.666666666666686" y="26.5" />
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.logic.ActorTest" target="com.codecool.quest.logic.GameMap">
+      <point x="0.0" y="5.976266552517643" />
+      <point x="0.0" y="5.976266552517643" />
+    </edge>
+    <edge source="com.codecool.quest.logic.actors.Skeleton" target="com.codecool.quest.logic.Cell">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
     </edge>
     <edge source="com.codecool.quest.logic.actors.Actor" target="com.codecool.quest.logic.Drawable">
-      <point x="0.0" y="-156.5" />
-      <point x="652.28125" y="78.0" />
-      <point x="418.66666666666663" y="78.0" />
-      <point x="44.66666666666663" y="26.5" />
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
     </edge>
     <edge source="com.codecool.quest.logic.items.Key" target="com.codecool.quest.logic.items.Item">
-      <point x="0.0" y="-47.5" />
-      <point x="67.0" y="461.0" />
-      <point x="117.28125" y="461.0" />
-      <point x="-30.5" y="26.5" />
+      <point x="-4.285633504805844" y="2.5755281909708856" />
+      <point x="-4.285633504805844" y="2.5755281909708856" />
+    </edge>
+    <edge source="com.codecool.quest.logic.CellTest" target="com.codecool.quest.logic.Cell">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.logic.CellTest" target="com.codecool.quest.logic.GameMap">
+      <point x="-4.9299255128860295" y="0.8341669121918045" />
+      <point x="-4.9299255128860295" y="0.8341669121917903" />
+    </edge>
+    <edge source="com.codecool.quest.logic.items.Item" target="com.codecool.quest.logic.Cell">
+      <point x="10.527516702604885" y="0.0" />
+      <point x="0.0" y="-31.991869861598616" />
     </edge>
     <edge source="com.codecool.quest.logic.Cell" target="com.codecool.quest.logic.Drawable">
-      <point x="0.0" y="-166.5" />
-      <point x="370.28125" y="78.0" />
-      <point x="374.0" y="78.0" />
-      <point x="0.0" y="26.5" />
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.Main" target="com.codecool.quest.logic.MapLoader">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
     </edge>
     <edge source="com.codecool.quest.logic.actors.Player" target="com.codecool.quest.logic.actors.Actor">
-      <point x="0.0" y="-155.5" />
-      <point x="800.5" y="461.0" />
-      <point x="712.53125" y="461.0" />
-      <point x="60.25" y="156.5" />
+      <point x="-4.985800010968774" y="-0.3765610848510903" />
+      <point x="-4.985800010968774" y="-0.3765610848510903" />
     </edge>
-    <edge source="com.codecool.quest.logic.actors.Skeleton" target="com.codecool.quest.logic.actors.Actor">
-      <point x="0.0" y="-47.5" />
-      <point x="511.5" y="461.0" />
-      <point x="592.03125" y="461.0" />
-      <point x="-60.25" y="156.5" />
+    <edge source="com.codecool.quest.logic.actors.Actor" target="com.codecool.quest.logic.Cell">
+      <point x="0.0" y="-8.48213198463867" />
+      <point x="0.0" y="-8.482131984638613" />
+    </edge>
+    <edge source="com.codecool.quest.Main" target="com.codecool.quest.logic.items.Sword">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.logic.ActorTest" target="com.codecool.quest.logic.CellType">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.logic.Cell" target="com.codecool.quest.logic.CellType">
+      <point x="-2.7912500814923717" y="-4.148363892255475" />
+      <point x="-2.7912500814924215" y="-4.148363892255475" />
+    </edge>
+    <edge source="com.codecool.quest.logic.ActorTest" target="com.codecool.quest.logic.actors.Player">
+      <point x="-4.397173940516041" y="2.380096917532285" />
+      <point x="-4.397173940516041" y="2.380096917532285" />
+    </edge>
+    <edge source="com.codecool.quest.Tiles" target="com.codecool.quest.logic.Drawable">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
     </edge>
     <edge source="com.codecool.quest.logic.items.Sword" target="com.codecool.quest.logic.items.Item">
-      <point x="0.0" y="-58.5" />
-      <point x="236.0" y="461.0" />
-      <point x="178.28125" y="461.0" />
-      <point x="30.5" y="26.5" />
+      <point x="2.1392453987631086" y="4.51925094721139" />
+      <point x="2.13924539876308" y="4.51925094721139" />
+    </edge>
+    <edge source="com.codecool.quest.logic.actors.Skeleton" target="com.codecool.quest.logic.actors.Actor">
+      <point x="5.4113844197758" y="0.0" />
+      <point x="5.4113844197758" y="2.8421709430404007E-14" />
+    </edge>
+    <edge source="com.codecool.quest.logic.MapLoader" target="com.codecool.quest.logic.items.Key">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.logic.MapLoader" target="com.codecool.quest.logic.items.Item">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.logic.Cell" target="com.codecool.quest.logic.GameMap">
+      <point x="0.0" y="-18.927924105971442" />
+      <point x="-11.777933728800463" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.logic.Cell" target="com.codecool.quest.logic.actors.Actor">
+      <point x="-4.038935146843016" y="2.9473721990268587" />
+      <point x="-4.038935146843073" y="2.947372199026802" />
+    </edge>
+    <edge source="com.codecool.quest.logic.ActorTest" target="com.codecool.quest.logic.actors.Skeleton">
+      <point x="2.8514061053463706" y="-4.107247645612972" />
+      <point x="2.8514061053463706" y="-4.107247645613029" />
+    </edge>
+    <edge source="com.codecool.quest.logic.Cell" target="com.codecool.quest.logic.items.Item">
+      <point x="0.0" y="31.99186986159873" />
+      <point x="-10.527516702604885" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.Main" target="com.codecool.quest.logic.Cell">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.logic.MapLoader" target="com.codecool.quest.logic.CellType">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.logic.GameMap" target="com.codecool.quest.logic.Cell">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.Main" target="com.codecool.quest.logic.GameMap">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.logic.actors.Player" target="com.codecool.quest.logic.items.Sword">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.Main" target="com.codecool.quest.Tiles">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.logic.items.Sword" target="com.codecool.quest.logic.Cell">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.codecool.quest.logic.MapLoader" target="com.codecool.quest.logic.Cell">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.2629296235679215" x="-172.4330937650102" y="1878.6191550311305" />
+  <settings layout="Circular" zoom="0.8300079808459697" x="660.5" y="606.5" />
   <SelectedNodes>
-    <node>com.codecool.quest.logic.items.Sword</node>
+    <node>com.codecool.quest.Tiles.Tile</node>
   </SelectedNodes>
   <Categories>
     <Category>Fields</Category>
