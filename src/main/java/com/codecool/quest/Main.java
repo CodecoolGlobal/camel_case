@@ -28,7 +28,9 @@ import java.util.List;
 
 public class Main extends Application {
     GameMap map = MapLoader.loadMap();
-    Canvas canvas = new Canvas(map.getWidth() * Tiles.TILE_WIDTH, map.getHeight() * Tiles.TILE_WIDTH);
+    int windowWidth = 10;
+    int windowHeight = 10;
+    Canvas canvas = new Canvas(windowWidth * Tiles.TILE_WIDTH, windowHeight * Tiles.TILE_WIDTH);
     Label healthLabel = new Label();
     Label swordLabel = new Label();
     Label keyLabel = new Label();
@@ -160,35 +162,51 @@ public class Main extends Application {
     }
 
     private void refresh() {
+        int[] windowCenterCoordinates = getPlayerCoordinates();
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        for (int x = 0; x < map.getWidth(); x++) {
-            for (int y = 0; y < map.getHeight(); y++) {
-                Cell cell = map.getCell(x, y);
-                if (cell.getActor() != null) {
-                    if (cell.getActor().getHealth() > 0) {
-                        Tiles.drawTile(context, cell.getActor(), x, y);
-                    } else {
-                        cell.setActor(null);
-                        Tiles.drawTile(context, cell, x, y);
-                    }
-                    if (cell.getItem() != null && cell.getItem().getTileName().equals("sword")) {
-                        Sword sword = (Sword) cell.getItem();
-                        map.getPlayer().addWeaponToInventory(sword);
-                        cell.setItem(null);
+        int windowX = 0;
+        int windowY = 0;
+        for (int mapX = windowCenterCoordinates[0] - (windowWidth / 2); mapX <= windowCenterCoordinates[0] + (windowWidth / 2); mapX++) {
+                for (int mapY = windowCenterCoordinates[1] - (windowHeight / 2); mapY <= windowCenterCoordinates[1] + (windowHeight / 2); mapY++) {
+                    try {
+                    Cell cell = map.getCell(mapX, mapY);
+                    if (cell.getActor() != null) {
+                        if (cell.getActor().getHealth() > 0) {
+                            Tiles.drawTile(context, cell.getActor(), windowX, windowY++);
+                        } else {
+                            cell.setActor(null);
+                            Tiles.drawTile(context, cell, windowX, windowY++);
+                        }
+                        if (cell.getItem() != null && cell.getItem().getTileName().equals("sword")) {
+                            Sword sword = (Sword) cell.getItem();
+                            map.getPlayer().addWeaponToInventory(sword);
+                            cell.setItem(null);
+                        } else if (cell.getItem() != null) {
+                            map.getPlayer().addItemToInventory(cell.getItem());
+                            cell.setItem(null);
+                        }
                     } else if (cell.getItem() != null) {
-                        map.getPlayer().addItemToInventory(cell.getItem());
-                        cell.setItem(null);
+                        Tiles.drawTile(context, cell.getItem(), windowX, windowY++);
+                    } else {
+                        Tiles.drawTile(context, cell, windowX, windowY++);
                     }
-                } else if (cell.getItem() != null) {
-                    Tiles.drawTile(context, cell.getItem(), x, y);
-                } else {
-                    Tiles.drawTile(context, cell, x, y);
-                }
+                }catch (IndexOutOfBoundsException e){
+                        Cell cell = map.getCell(0, 0);
+                        Tiles.drawTile(context, cell, windowX, windowY++);
+                    }
+
             }
+            windowY = 0;
+            windowX++;
+
         }
         healthLabel.setText("Health: " + map.getPlayer().getHealth());
         swordLabel.setText("" + map.getPlayer().getSword());
         keyLabel.setText("" + map.getPlayer().getKey());
+    }
+
+    private int[] getPlayerCoordinates(){
+        return new int[]{map.getPlayer().getCell().getX(), map.getPlayer().getCell().getY()};
     }
 }
