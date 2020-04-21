@@ -7,6 +7,7 @@ public abstract class Actor implements Drawable {
     private Cell cell;
     private int health;
     private int attackDamage;
+    private int steps;
 
     public Actor(Cell cell) {
         this.cell = cell;
@@ -59,6 +60,10 @@ public abstract class Actor implements Drawable {
         return cell;
     }
 
+    public void setCell(Cell cell){
+        this.cell = cell;
+    }
+
     public Cell getNeighborEnemyCell() {
         int[][] coordinateModifiers = {{0, 1}, {1, 0}, {-1, 0}, {0, -1}};
         for (int[] modifier : coordinateModifiers) {
@@ -69,5 +74,12 @@ public abstract class Actor implements Drawable {
         return null;
     }
 
+    public int getSteps(){
+        return this.steps;
+    }
+
+    public void setSteps(int steps){
+        this.steps = steps;
+    }
 
 }

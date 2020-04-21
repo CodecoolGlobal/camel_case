@@ -192,7 +192,8 @@ public class Main extends Application {
     private void autoMoveEnemies(){
         List<Skeleton> skeletonList = Skeleton.getSkeletonList();
         for (Skeleton skeleton : skeletonList) {
-            skeleton.autoMove();
+            int[] playerPos = {map.getPlayer().getCell().getX(),map.getPlayer().getCell().getY()};
+            skeleton.smartAutomove(playerPos);
         }
         List<Ghost> ghostList = Ghost.getGhostList();
         for(Ghost ghost : ghostList){
