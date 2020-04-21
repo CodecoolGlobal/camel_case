@@ -8,4 +8,8 @@ public abstract class Item implements Drawable{
     public Item(Cell cell){
         cell.setItem(this);
     }
+
+    public String getTileName(){
+        return this.getClass().getSimpleName().toLowerCase();
+    }
 }

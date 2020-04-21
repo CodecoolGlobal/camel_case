@@ -11,12 +11,6 @@ public class Sword extends Item {
         this.setAttackDamage(attackDamage);
     }
 
-
-    @Override
-    public String getTileName() {
-        return "sword";
-    }
-
     public void setAttackDamage(int attackDamage){
         this.attackDamage = attackDamage;
     }

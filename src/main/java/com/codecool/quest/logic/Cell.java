@@ -33,20 +33,12 @@ public class Cell implements Drawable {
         this.actor = actor;
     }
 
-    public void removeActor() {
-        this.actor = null;
-    }
-
     public Item getItem() {
         return item;
     }
 
     public void setItem(Item item) {
         this.item = item;
-    }
-
-    public void removeItem() {
-        this.item = null;
     }
 
     public Cell getNeighbor(int dx, int dy) {
@@ -66,9 +58,12 @@ public class Cell implements Drawable {
         return y;
     }
 
+    public boolean isFloorCell(){
+        return this.getType().toString().equals("FLOOR");
+    }
+
     @Override
     public String getTileName() {
         return type.getTileName();
     }
-
 }

@@ -18,12 +18,6 @@ public class Skeleton extends Actor {
         skeletonList.add(this);
     }
 
-
-    @Override
-    public String getTileName() {
-        return "skeleton";
-    }
-
     public void autoMove(){
         String direction = Util.getRandomDirection();
         assert direction != null;

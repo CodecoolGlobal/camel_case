@@ -169,16 +169,16 @@ public class Main extends Application {
                     if (cell.getActor().getHealth() > 0) {
                         Tiles.drawTile(context, cell.getActor(), x, y);
                     } else {
-                        cell.removeActor();
+                        cell.setActor(null);
                         Tiles.drawTile(context, cell, x, y);
                     }
                     if (cell.getItem() != null && cell.getItem().getTileName().equals("sword")) {
                         Sword sword = (Sword) cell.getItem();
                         map.getPlayer().addWeaponToInventory(sword);
-                        cell.removeItem();
+                        cell.setItem(null);
                     } else if (cell.getItem() != null) {
                         map.getPlayer().addItemToInventory(cell.getItem());
-                        cell.removeItem();
+                        cell.setItem(null);
                     }
                 } else if (cell.getItem() != null) {
                     Tiles.drawTile(context, cell.getItem(), x, y);
@@ -188,7 +188,7 @@ public class Main extends Application {
             }
         }
         healthLabel.setText("Health: " + map.getPlayer().getHealth());
-        swordLabel.setText("" + map.getPlayer().sword);
-        keyLabel.setText("" + map.getPlayer().key);
+        swordLabel.setText("" + map.getPlayer().getSword());
+        keyLabel.setText("" + map.getPlayer().getKey());
     }
 }

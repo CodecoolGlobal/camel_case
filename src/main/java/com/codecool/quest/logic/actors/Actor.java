@@ -13,11 +13,14 @@ public abstract class Actor implements Drawable {
         this.cell.setActor(this);
     }
 
+    public String getTileName(){
+        return this.getClass().getSimpleName().toLowerCase();
+    }
 
     public void move(int dx, int dy, boolean godMode) {
         Cell nextCell = cell.getNeighbor(dx, dy);
         if (nextCell != null) {
-            if ((isFloorCell(nextCell) && nextCell.getActor() == null) || godMode) {
+            if ((nextCell.isFloorCell() && nextCell.getActor() == null) || godMode) {
                 cell.setActor(null);
                 nextCell.setActor(this);
                 cell = nextCell;
@@ -37,8 +40,8 @@ public abstract class Actor implements Drawable {
         this.health = health;
     }
 
-    public void updateHealth(int attackDamage) {
-        this.health = this.health - attackDamage;
+    public void updateHealth(int injury) {
+        this.health = this.health - injury;
         if (this.health > 0) {
             this.cell.getActor().getNeighborEnemyCell();
         }
@@ -66,15 +69,4 @@ public abstract class Actor implements Drawable {
         return null;
     }
 
-    public int getX() {
-        return cell.getX();
-    }
-
-    public int getY() {
-        return cell.getY();
-    }
-
-    public boolean isFloorCell(Cell cell) {
-        return cell.getType().toString().equals("FLOOR");
-    }
 }

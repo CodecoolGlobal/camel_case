@@ -10,13 +10,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Player extends Actor {
-
-    public int key = 0;
-    public int sword = 0;
-
-    boolean godMode;
-    String name;
-    public ListView<Item> inventory;
+    private int key = 0;
+    private int sword = 0;
+    private boolean godMode;
+    private String name;
+    private ListView<Item> inventory;
 
     public Player(Cell cell, ListView<Item> inventory, int health, int attackDamage) {
         super(cell);
@@ -25,13 +23,7 @@ public class Player extends Actor {
         this.setAttackDamage(attackDamage);
     }
 
-
-    public String getTileName() {
-        return "player";
-    }
-
     public void setGodMode(String name) {
-
         List<String> developerNames = new ArrayList<>(Arrays.asList("Edit", "Vivien", "Tomi", "Kornél"));
         this.godMode = developerNames.contains(name);
     }
@@ -63,5 +55,21 @@ public class Player extends Actor {
         return this.name;
     }
 
+
+    public int getKey() {
+        return key;
+    }
+
+    public void setKey(int key) {
+        this.key = key;
+    }
+
+    public int getSword() {
+        return sword;
+    }
+
+    public void setSword(int sword) {
+        this.sword = sword;
+    }
 
 }
