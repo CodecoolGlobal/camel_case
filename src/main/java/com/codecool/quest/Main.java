@@ -3,6 +3,7 @@ package com.codecool.quest;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
+import com.codecool.quest.logic.actors.Ghost;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.items.Sword;
 import javafx.application.Application;
@@ -118,11 +119,7 @@ public class Main extends Application {
     private void onKeyPressed(KeyEvent keyEvent) {
 
         // skeleton movement
-        List<Skeleton> skeletonList = Skeleton.getSkeletonList();
-        for (Skeleton skeleton : skeletonList) {
-            skeleton.autoMove();
-        }
-
+        autoMoveEnemies();
 
         switch (keyEvent.getCode()) {
             case UP:
@@ -172,11 +169,11 @@ public class Main extends Application {
                         cell.setActor(null);
                         Tiles.drawTile(context, cell, x, y);
                     }
-                    if (cell.getItem() != null && cell.getItem().getTileName().equals("sword")) {
+                    if (cell.getItem() != null && cell.getItem().getTileName().equals("sword") && cell.getActor().getTileName().equals("player")) {
                         Sword sword = (Sword) cell.getItem();
                         map.getPlayer().addWeaponToInventory(sword);
                         cell.setItem(null);
-                    } else if (cell.getItem() != null) {
+                    } else if (cell.getItem() != null && cell.getActor().getTileName().equals("player")) {
                         map.getPlayer().addItemToInventory(cell.getItem());
                         cell.setItem(null);
                     }
@@ -190,5 +187,16 @@ public class Main extends Application {
         healthLabel.setText("Health: " + map.getPlayer().getHealth());
         swordLabel.setText("" + map.getPlayer().getSword());
         keyLabel.setText("" + map.getPlayer().getKey());
+    }
+
+    private void autoMoveEnemies(){
+        List<Skeleton> skeletonList = Skeleton.getSkeletonList();
+        for (Skeleton skeleton : skeletonList) {
+            skeleton.autoMove();
+        }
+        List<Ghost> ghostList = Ghost.getGhostList();
+        for(Ghost ghost : ghostList){
+            ghost.autoMove();
+        }
     }
 }
