@@ -2,9 +2,8 @@ package com.codecool.quest.logic;
 
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
-import com.codecool.quest.logic.items.Item;
-import com.codecool.quest.logic.items.Key;
-import com.codecool.quest.logic.items.Sword;
+import com.codecool.quest.logic.items.Trap;
+import com.codecool.quest.logic.items.*;
 import javafx.scene.control.ListView;
 
 import java.io.InputStream;
@@ -47,11 +46,27 @@ public class MapLoader {
                             break;
                         case 'k':
                             cell.setType(CellType.FLOOR);
-                            new Key(cell);
+                            new Key1(cell);
+                            break;
+                        case 'K':
+                            cell.setType(CellType.FLOOR);
+                            new Key2(cell);
                             break;
                         case 'w':
                             cell.setType(CellType.FLOOR);
                             new Sword(cell, 2);
+                            break;
+                        case 'p':
+                            cell.setType(CellType.FLOOR);
+                            new Potion1(cell);
+                            break;
+                        case 'P':
+                            cell.setType(CellType.FLOOR);
+                            new Potion2(cell);
+                            break;
+                        case 'u':
+                            cell.setType(CellType.FLOOR);
+                            new Trap(cell);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
