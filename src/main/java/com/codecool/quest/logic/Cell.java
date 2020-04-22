@@ -1,14 +1,12 @@
 package com.codecool.quest.logic;
 
 import com.codecool.quest.logic.actors.Actor;
-import com.codecool.quest.logic.items.Item;
 
 public class Cell implements Drawable {
     private CellType type;
     private Actor actor;
     private GameMap gameMap;
     private int x, y;
-    private Item item;
 
     Cell(GameMap gameMap, int x, int y, CellType type) {
         this.gameMap = gameMap;
@@ -25,29 +23,21 @@ public class Cell implements Drawable {
         this.type = type;
     }
 
-    public Actor getActor() {
-        return actor;
-    }
-
     public void setActor(Actor actor) {
         this.actor = actor;
     }
 
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
+    public Actor getActor() {
+        return actor;
     }
 
     public Cell getNeighbor(int dx, int dy) {
-        try {
-            return gameMap.getCell(x + dx, y + dy);
-        } catch (ArrayIndexOutOfBoundsException a) {
-            return null;
-        }
+        return gameMap.getCell(x + dx, y + dy);
+    }
 
+    @Override
+    public String getTileName() {
+        return type.getTileName();
     }
 
     public int getX() {
@@ -56,14 +46,5 @@ public class Cell implements Drawable {
 
     public int getY() {
         return y;
-    }
-
-    public boolean isFloorCell(){
-        return this.getType().toString().equals("FLOOR");
-    }
-
-    @Override
-    public String getTileName() {
-        return type.getTileName();
     }
 }

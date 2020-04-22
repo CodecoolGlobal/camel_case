@@ -6,6 +6,7 @@ public class GameMap {
     private int width;
     private int height;
     private Cell[][] cells;
+
     private Player player;
 
     public GameMap(int width, int height, CellType defaultCellType) {
