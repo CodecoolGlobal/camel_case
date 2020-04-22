@@ -8,6 +8,7 @@ public abstract class Actor implements Drawable {
     private int health;
     private int attackDamage;
     boolean isAlive = true;
+    private int steps;
 
     public Actor(Cell cell) {
         this.cell = cell;
@@ -83,6 +84,13 @@ public abstract class Actor implements Drawable {
         return null;
     }
 
+    public int getSteps(){
+        return this.steps;
+    }
+
+    public void setSteps(int steps){
+        this.steps = steps;
+    }
     public String getType(){
         return this.getClass().getSimpleName().toLowerCase();
     }

@@ -121,9 +121,6 @@ public class Main extends Application {
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
-
-        // skeleton movement
-
         if (map.getPlayer().isAlive()) {
             switch (keyEvent.getCode()) {
                 case UP:
@@ -208,7 +205,6 @@ public class Main extends Application {
                     Cell cell = map.getCell(0, 0);
                     Tiles.drawTile(context, cell, windowX, windowY++);
                 }
-
             }
             windowY = 0;
             windowX++;
@@ -219,17 +215,19 @@ public class Main extends Application {
         keyLabel.setText("" + map.getPlayer().getKey());
     }
 
-    private void autoMoveEnemies() {
+    private void autoMoveEnemies(){
         List<Skeleton> skeletonList = Skeleton.getSkeletonList();
         for (Skeleton skeleton : skeletonList) {
             if (skeleton.isAlive()) {
-                skeleton.autoMove();
+                int[] playerPos = {map.getPlayer().getCell().getX(),map.getPlayer().getCell().getY()};
+                skeleton.smartAutomove(playerPos);
             }
         }
         List<Ghost> ghostList = Ghost.getGhostList();
         for (Ghost ghost : ghostList) {
             if (ghost.isAlive()) {
-                ghost.autoMove();
+                int[] playerPos = {map.getPlayer().getCell().getX(),map.getPlayer().getCell().getY()};
+                ghost.smartAutomove(playerPos);
             }
         }
     }

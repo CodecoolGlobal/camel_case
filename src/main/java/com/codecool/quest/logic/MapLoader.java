@@ -43,7 +43,7 @@ public class MapLoader {
                             break;
                         case 's':
                             cell.setType(CellType.FLOOR);
-                            new Skeleton(cell, 5, 2);
+                            new Skeleton(cell, 5, 2, 1);
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);
@@ -59,7 +59,7 @@ public class MapLoader {
                             break;
                         case 'g':
                             cell.setType(CellType.FLOOR);
-                            new Ghost(cell, 4, 4);
+                            new Ghost(cell, 4, 4, 3);
                             break;
                         case 'l':
                             cell.setType(CellType.FLOOR);
