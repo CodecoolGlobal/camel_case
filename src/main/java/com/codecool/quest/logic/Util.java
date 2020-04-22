@@ -6,11 +6,12 @@ public class Util {
     static Random random = new Random();
 
     static public int getRandomNumber(int min, int max){
+        max++;
         return min + random.nextInt(max - min);
     }
 
     static public String getRandomDirection(){
-        int direction = getRandomNumber(0, 4);
+        int direction = getRandomNumber(0, 3);
         switch (direction){
             case 0:
                 return "UP";

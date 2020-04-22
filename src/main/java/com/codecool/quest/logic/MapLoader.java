@@ -2,9 +2,8 @@ package com.codecool.quest.logic;
 
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
-import com.codecool.quest.logic.items.Item;
-import com.codecool.quest.logic.items.Key;
-import com.codecool.quest.logic.items.Sword;
+import com.codecool.quest.logic.items.Trap;
+import com.codecool.quest.logic.items.*;
 import javafx.scene.control.ListView;
 
 import java.io.InputStream;
@@ -12,11 +11,11 @@ import java.util.Scanner;
 
 public class MapLoader {
     public static GameMap loadMap() {
-        InputStream is = MapLoader.class.getResourceAsStream("/map.txt");
+        InputStream is = MapLoader.class.getResourceAsStream("/map2.txt");
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
         int height = scanner.nextInt();
-
+        int count = 0;
         scanner.nextLine(); // empty line
 
         GameMap map = new GameMap(width, height, CellType.EMPTY);
@@ -34,6 +33,9 @@ public class MapLoader {
                         case '#':
                             cell.setType(CellType.WALL);
                             break;
+                        case 'r':
+                            cell.setType(CellType.WINDOW);
+                            break;
                         case '.':
                             cell.setType(CellType.FLOOR);
                             break;
@@ -47,12 +49,21 @@ public class MapLoader {
                             break;
                         case 'k':
                             cell.setType(CellType.FLOOR);
-                            new Key(cell);
+                            new Key(cell, count++);
                             break;
                         case 'w':
                             cell.setType(CellType.FLOOR);
                             new Sword(cell, 2);
                             break;
+                        case 'p':
+                            cell.setType(CellType.FLOOR);
+                            new Potion(cell);
+                            break;
+                        case 'u':
+                            cell.setType(CellType.FLOOR);
+                            new Trap(cell, 1);
+                            break;
+
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }

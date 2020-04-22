@@ -1,11 +1,13 @@
 package com.codecool.quest.logic;
 
 import com.codecool.quest.logic.actors.Actor;
+import com.codecool.quest.logic.actors.Cross;
 import com.codecool.quest.logic.items.Item;
 
 public class Cell implements Drawable {
     private CellType type;
     private Actor actor;
+    private Cross cross;
     private GameMap gameMap;
     private int x, y;
     private Item item;
@@ -29,9 +31,12 @@ public class Cell implements Drawable {
         return actor;
     }
 
+
     public void setActor(Actor actor) {
         this.actor = actor;
     }
+
+    public Cross getCross() {return cross;}
 
     public Item getItem() {
         return item;

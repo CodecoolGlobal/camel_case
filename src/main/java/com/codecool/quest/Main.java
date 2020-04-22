@@ -3,8 +3,12 @@ package com.codecool.quest;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
+import com.codecool.quest.logic.actors.Cross;
 import com.codecool.quest.logic.actors.Skeleton;
+import com.codecool.quest.logic.items.Item;
+import com.codecool.quest.logic.items.Potion;
 import com.codecool.quest.logic.items.Sword;
+import com.codecool.quest.logic.items.Trap;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -109,7 +113,7 @@ public class Main extends Application {
         ui.add(imageView, 0, rowIndex);
         ui.add(keyLabel, 1, rowIndex++);
         ui.add(imageView2, 0, rowIndex);
-        ui.add(swordLabel, 1, rowIndex);
+        ui.add(swordLabel, 1, rowIndex++);
     }
 
     private void setLabel(Label healthLabel) {
@@ -175,16 +179,26 @@ public class Main extends Application {
                         if (cell.getActor().getHealth() > 0) {
                             Tiles.drawTile(context, cell.getActor(), windowX, windowY++);
                         } else {
-                            cell.setActor(null);
-                            Tiles.drawTile(context, cell, windowX, windowY++);
+                            Cross cross = new Cross(cell);
+                            map.getPlayer().setCell(null);
+                            cell.setActor(cross);
+                            Tiles.drawTile(context, cell.getActor(), windowX, windowY++);
                         }
                         if (cell.getItem() != null && cell.getItem().getTileName().equals("sword")) {
                             Sword sword = (Sword) cell.getItem();
                             map.getPlayer().addWeaponToInventory(sword);
                             cell.setItem(null);
-                        } else if (cell.getItem() != null) {
-                            map.getPlayer().addItemToInventory(cell.getItem());
+                        } else if (cell.getItem() != null && cell.getItem().getType().equals("key")) {
+                            map.getPlayer().addKeyToInventory(cell.getItem());
                             cell.setItem(null);
+                        } else if (cell.getItem() != null && cell.getItem().getType().equals("potion")) {
+                            map.getPlayer().addPotionToInventory(cell.getItem());
+                            Potion healthPotion = (Potion) cell.getItem();
+                            map.getPlayer().updateHealth(healthPotion.getHealAmount());
+                            cell.setItem(null);
+                        } else if (cell.getItem() != null && cell.getItem().getType().equals("trap")) {
+                            Trap trap = (Trap) cell.getItem();
+                            map.getPlayer().updateHealth(-trap.getDamage());
                         }
                     } else if (cell.getItem() != null) {
                         Tiles.drawTile(context, cell.getItem(), windowX, windowY++);

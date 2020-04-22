@@ -29,7 +29,7 @@ public abstract class Actor implements Drawable {
     }
 
     public void attack(Cell cell) {
-        cell.getActor().updateHealth(getAttackDamage());
+        cell.getActor().updateHealth(-getAttackDamage());
     }
 
     public int getHealth() {
@@ -40,8 +40,8 @@ public abstract class Actor implements Drawable {
         this.health = health;
     }
 
-    public void updateHealth(int injury) {
-        this.health = this.health - injury;
+    public void updateHealth(int modifier) {
+        this.health = this.health + modifier;
         if (this.health > 0) {
             this.cell.getActor().getNeighborEnemyCell();
         }
@@ -57,6 +57,10 @@ public abstract class Actor implements Drawable {
 
     public Cell getCell() {
         return cell;
+    }
+
+    public void setCell(Cell cell){
+        this.cell = cell;
     }
 
     public Cell getNeighborEnemyCell() {
