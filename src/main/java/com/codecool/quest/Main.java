@@ -3,10 +3,8 @@ package com.codecool.quest;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
-import com.codecool.quest.logic.actors.Cross;
 import com.codecool.quest.logic.actors.Ghost;
 import com.codecool.quest.logic.actors.Skeleton;
-import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Potion;
 import com.codecool.quest.logic.items.Sword;
 import com.codecool.quest.logic.items.Trap;
@@ -33,8 +31,8 @@ import java.util.List;
 
 public class Main extends Application {
     GameMap map = MapLoader.loadMap();
-    int windowWidth = 10;
-    int windowHeight = 10;
+    int windowWidth = 20;
+    int windowHeight = 20;
     Canvas canvas = new Canvas(windowWidth * Tiles.TILE_WIDTH, windowHeight * Tiles.TILE_WIDTH);
     Label healthLabel = new Label();
     Label swordLabel = new Label();
@@ -125,37 +123,39 @@ public class Main extends Application {
     private void onKeyPressed(KeyEvent keyEvent) {
 
         // skeleton movement
-        autoMoveEnemies();
 
-        switch (keyEvent.getCode()) {
-            case UP:
-                map.getPlayer().move(0, -1, map.getPlayer().isGodMode());
-                refresh();
-                break;
-            case DOWN:
-                map.getPlayer().move(0, 1, map.getPlayer().isGodMode());
-                refresh();
-                break;
-            case LEFT:
-                map.getPlayer().move(-1, 0, map.getPlayer().isGodMode());
-                refresh();
-                break;
-            case RIGHT:
-                map.getPlayer().move(1, 0, map.getPlayer().isGodMode());
-                refresh();
-                break;
-            case SPACE:
-                handleAttack();
-                refresh();
-                break;
+        if (map.getPlayer().isAlive()) {
+            switch (keyEvent.getCode()) {
+                case UP:
+                    map.getPlayer().move(0, -1, map.getPlayer().isGodMode());
+                    refresh();
+                    break;
+                case DOWN:
+                    map.getPlayer().move(0, 1, map.getPlayer().isGodMode());
+                    refresh();
+                    break;
+                case LEFT:
+                    map.getPlayer().move(-1, 0, map.getPlayer().isGodMode());
+                    refresh();
+                    break;
+                case RIGHT:
+                    map.getPlayer().move(1, 0, map.getPlayer().isGodMode());
+                    refresh();
+                    break;
+                case SPACE:
+                    handleAttack();
+                    refresh();
+                    break;
+            }
         }
+        autoMoveEnemies();
     }
 
     private void handleAttack() {
         Cell cellToAttack = map.getPlayer().getNeighborEnemyCell();
         if (cellToAttack != null) {
             map.getPlayer().attack(cellToAttack);
-            if (cellToAttack.getActor().getHealth() > 0) {
+            if (cellToAttack.getActor().isAlive()) {
                 Cell playerCell = map.getPlayer().getCell();
                 cellToAttack.getActor().attack(playerCell);
             }
@@ -169,43 +169,45 @@ public class Main extends Application {
         int windowX = 0;
         int windowY = 0;
         for (int mapX = windowCenterCoordinates[0] - (windowWidth / 2); mapX <= windowCenterCoordinates[0] + (windowWidth / 2); mapX++) {
-                for (int mapY = windowCenterCoordinates[1] - (windowHeight / 2); mapY <= windowCenterCoordinates[1] + (windowHeight / 2); mapY++) {
-                    try {
+            for (int mapY = windowCenterCoordinates[1] - (windowHeight / 2); mapY <= windowCenterCoordinates[1] + (windowHeight / 2); mapY++) {
+                try {
                     Cell cell = map.getCell(mapX, mapY);
                     if (cell.getActor() != null) {
                         if (cell.getActor().getHealth() > 0) {
                             Tiles.drawTile(context, cell.getActor(), windowX, windowY++);
+                            if (cell.getActor().getType().equals("player")) {
+                                if (cell.getItem() != null && cell.getItem().getTileName().equals("sword")) {
+                                    Sword sword = (Sword) cell.getItem();
+                                    map.getPlayer().addWeaponToInventory(sword);
+                                    cell.setItem(null);
+                                } else if (cell.getItem() != null && cell.getItem().getType().equals("key")) {
+                                    map.getPlayer().addKeyToInventory(cell.getItem());
+                                    cell.setItem(null);
+                                } else if (cell.getItem() != null && cell.getItem().getType().equals("potion")) {
+                                    map.getPlayer().addPotionToInventory(cell.getItem());
+                                    Potion healthPotion = (Potion) cell.getItem();
+                                    map.getPlayer().updateHealth(healthPotion.getHealAmount());
+                                    cell.setItem(null);
+                                } else if (cell.getItem() != null && cell.getItem().getType().equals("trap")) {
+                                    Trap trap = (Trap) cell.getItem();
+                                    map.getPlayer().updateHealth(-trap.getDamage());
+                                }
+                            }
                         } else {
-                            Cross cross = new Cross(cell);
-                            map.getPlayer().setCell(null);
-                            cell.setActor(cross);
-                            Tiles.drawTile(context, cell.getActor(), windowX, windowY++);
+                            cell.getActor().setAlive(false);
+                            cell.setActor(null);
+                            Tiles.drawTile(context, cell, windowX, windowY++);
                         }
-                        if (cell.getItem() != null && cell.getItem().getTileName().equals("sword")) {
-                            Sword sword = (Sword) cell.getItem();
-                            map.getPlayer().addWeaponToInventory(sword);
-                            cell.setItem(null);
-                        } else if (cell.getItem() != null && cell.getItem().getType().equals("key")) {
-                            map.getPlayer().addKeyToInventory(cell.getItem());
-                            cell.setItem(null);
-                        } else if (cell.getItem() != null && cell.getItem().getType().equals("potion")) {
-                            map.getPlayer().addPotionToInventory(cell.getItem());
-                            Potion healthPotion = (Potion) cell.getItem();
-                            map.getPlayer().updateHealth(healthPotion.getHealAmount());
-                            cell.setItem(null);
-                        } else if (cell.getItem() != null && cell.getItem().getType().equals("trap")) {
-                            Trap trap = (Trap) cell.getItem();
-                            map.getPlayer().updateHealth(-trap.getDamage());
-                        }
+
                     } else if (cell.getItem() != null) {
                         Tiles.drawTile(context, cell.getItem(), windowX, windowY++);
                     } else {
                         Tiles.drawTile(context, cell, windowX, windowY++);
                     }
-                }catch (IndexOutOfBoundsException e){
-                        Cell cell = map.getCell(0, 0);
-                        Tiles.drawTile(context, cell, windowX, windowY++);
-                    }
+                } catch (IndexOutOfBoundsException e) {
+                    Cell cell = map.getCell(0, 0);
+                    Tiles.drawTile(context, cell, windowX, windowY++);
+                }
 
             }
             windowY = 0;
@@ -217,18 +219,22 @@ public class Main extends Application {
         keyLabel.setText("" + map.getPlayer().getKey());
     }
 
-    private void autoMoveEnemies(){
+    private void autoMoveEnemies() {
         List<Skeleton> skeletonList = Skeleton.getSkeletonList();
         for (Skeleton skeleton : skeletonList) {
-            skeleton.autoMove();
+            if (skeleton.isAlive()) {
+                skeleton.autoMove();
+            }
         }
         List<Ghost> ghostList = Ghost.getGhostList();
-        for(Ghost ghost : ghostList){
-            ghost.autoMove();
+        for (Ghost ghost : ghostList) {
+            if (ghost.isAlive()) {
+                ghost.autoMove();
+            }
         }
     }
 
-    private int[] getPlayerCoordinates(){
+    private int[] getPlayerCoordinates() {
         return new int[]{map.getPlayer().getCell().getX(), map.getPlayer().getCell().getY()};
     }
 }

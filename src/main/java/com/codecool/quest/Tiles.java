@@ -35,20 +35,23 @@ public class Tiles {
         tileMap.put("key1", new Tile(18, 23));
         tileMap.put("door1", new Tile(10, 9));
         tileMap.put("door2", new Tile(22, 11));
-        tileMap.put("potion1", new Tile(18,25));
-        tileMap.put("potion2", new Tile(26,23));
-        tileMap.put("trap", new Tile(15,10));
-        tileMap.put("bush", new Tile(6,2));
+        tileMap.put("potion1", new Tile(18, 25));
+        tileMap.put("potion2", new Tile(26, 23));
+        tileMap.put("trap", new Tile(15, 10));
+        tileMap.put("bush", new Tile(6, 2));
         tileMap.put("cross", new Tile(1, 14));
-        tileMap.put("window", new Tile(1,13));
+        tileMap.put("window", new Tile(1, 13));
 
         tileMap.put("ghost", new Tile(26, 6));
-        tileMap.put("knight", new Tile(31,0));
+        tileMap.put("knight", new Tile(31, 0));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
+
         Tile tile = tileMap.get(d.getTileName());
+
         context.drawImage(tileset, tile.x, tile.y, tile.w, tile.h, x * TILE_WIDTH, y * TILE_WIDTH, TILE_WIDTH,
                 TILE_WIDTH);
+
     }
 }

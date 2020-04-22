@@ -7,13 +7,23 @@ public abstract class Actor implements Drawable {
     private Cell cell;
     private int health;
     private int attackDamage;
+    boolean isAlive = true;
 
     public Actor(Cell cell) {
         this.cell = cell;
         this.cell.setActor(this);
     }
 
-    public String getTileName(){
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
+    }
+
+    public String getTileName() {
         return this.getClass().getSimpleName().toLowerCase();
     }
 
@@ -59,7 +69,7 @@ public abstract class Actor implements Drawable {
         return cell;
     }
 
-    public void setCell(Cell cell){
+    public void setCell(Cell cell) {
         this.cell = cell;
     }
 
@@ -71,6 +81,10 @@ public abstract class Actor implements Drawable {
             }
         }
         return null;
+    }
+
+    public String getType(){
+        return this.getClass().getSimpleName().toLowerCase();
     }
 
 
