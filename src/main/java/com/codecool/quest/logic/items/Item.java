@@ -11,5 +11,9 @@ public abstract class Item implements Drawable{
 
     public String getTileName(){
         return this.getClass().getSimpleName().toLowerCase();
+        }
+
+    public String getType(){
+        return this.getClass().getSimpleName().toLowerCase();
     }
 }

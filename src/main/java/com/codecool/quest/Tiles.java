@@ -30,9 +30,9 @@ public class Tiles {
         tileMap.put("floor", new Tile(2, 0));
         tileMap.put("player", new Tile(27, 0));
         tileMap.put("skeleton", new Tile(29, 6));
-        tileMap.put("key1", new Tile(16, 23));
+        tileMap.put("key0", new Tile(16, 23));
         tileMap.put("sword", new Tile(9, 29));
-        tileMap.put("key2", new Tile(18, 23));
+        tileMap.put("key1", new Tile(18, 23));
         tileMap.put("door1", new Tile(10, 9));
         tileMap.put("door2", new Tile(22, 11));
         tileMap.put("potion1", new Tile(18,25));
@@ -46,6 +46,7 @@ public class Tiles {
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
         Tile tile = tileMap.get(d.getTileName());
+
         context.drawImage(tileset, tile.x, tile.y, tile.w, tile.h, x * TILE_WIDTH, y * TILE_WIDTH, TILE_WIDTH,
                 TILE_WIDTH);
     }

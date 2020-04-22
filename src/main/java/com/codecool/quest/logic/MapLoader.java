@@ -15,7 +15,7 @@ public class MapLoader {
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
         int height = scanner.nextInt();
-
+        int count = 0;
         scanner.nextLine(); // empty line
 
         GameMap map = new GameMap(width, height, CellType.EMPTY);
@@ -49,11 +49,7 @@ public class MapLoader {
                             break;
                         case 'k':
                             cell.setType(CellType.FLOOR);
-                            new Key1(cell);
-                            break;
-                        case 'K':
-                            cell.setType(CellType.FLOOR);
-                            new Key2(cell);
+                            new Key(cell, count++);
                             break;
                         case 'w':
                             cell.setType(CellType.FLOOR);
@@ -61,11 +57,7 @@ public class MapLoader {
                             break;
                         case 'p':
                             cell.setType(CellType.FLOOR);
-                            new Potion1(cell);
-                            break;
-                        case 'P':
-                            cell.setType(CellType.FLOOR);
-                            new Potion2(cell);
+                            new Potion(cell);
                             break;
                         case 'u':
                             cell.setType(CellType.FLOOR);
