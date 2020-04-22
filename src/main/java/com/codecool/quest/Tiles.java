@@ -39,10 +39,9 @@ public class Tiles {
         tileMap.put("potion2", new Tile(26,23));
         tileMap.put("trap", new Tile(15,10));
         tileMap.put("bush", new Tile(6,2));
-        tileMap.put("candle1", new Tile(5,15));
-        tileMap.put("candle2", new Tile(4,15));
+        tileMap.put("cross", new Tile(1, 14));
         tileMap.put("window", new Tile(1,13));
-        tileMap.put("randomFloor", new Tile(1,0));
+
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {

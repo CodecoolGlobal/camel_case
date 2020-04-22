@@ -45,6 +45,7 @@ public abstract class Actor implements Drawable {
         if (this.health > 0) {
             this.cell.getActor().getNeighborEnemyCell();
         }
+
     }
 
     public int getAttackDamage() {

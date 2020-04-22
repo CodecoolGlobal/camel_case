@@ -66,8 +66,9 @@ public class MapLoader {
                             break;
                         case 'u':
                             cell.setType(CellType.FLOOR);
-                            new Trap(cell);
+                            new Trap(cell, 1);
                             break;
+
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }

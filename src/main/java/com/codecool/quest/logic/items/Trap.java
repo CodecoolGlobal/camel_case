@@ -10,4 +10,8 @@ public class Trap extends Item {
         this.damage = damage;
 
     }
+
+    public int getDamage(){
+        return this.damage;
+    }
 }

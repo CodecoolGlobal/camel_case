@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Player extends Actor {
+    private int potion = 0;
     private int key = 0;
     private int sword = 0;
     private boolean godMode;
@@ -31,8 +32,12 @@ public class Player extends Actor {
     public boolean isGodMode() {
         return this.godMode;
     }
+    public void addPotionToInventory(Item item){
+        this.inventory.getItems().add(item);
+        this.potion += 1;
+    }
 
-    public void addItemToInventory(Item item) {
+    public void addKeyToInventory(Item item) {
         this.inventory.getItems().add(item);
         this.key += 1;
     }
@@ -70,6 +75,9 @@ public class Player extends Actor {
 
     public void setSword(int sword) {
         this.sword = sword;
+    }
+    public int getPotion(){
+        return this.potion;
     }
 
 }
