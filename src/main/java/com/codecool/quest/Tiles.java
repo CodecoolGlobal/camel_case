@@ -39,9 +39,9 @@ public class Tiles {
         tileMap.put("potion2", new Tile(26, 23));
         tileMap.put("trap", new Tile(15, 10));
         tileMap.put("bush", new Tile(6, 2));
+        tileMap.put("greenBush", new Tile(1, 2));
         tileMap.put("cross", new Tile(1, 14));
         tileMap.put("window", new Tile(1, 13));
-
         tileMap.put("ghost", new Tile(26, 6));
         tileMap.put("knight", new Tile(31, 0));
     }
