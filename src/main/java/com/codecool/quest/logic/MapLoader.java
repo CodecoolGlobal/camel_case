@@ -1,5 +1,7 @@
 package com.codecool.quest.logic;
 
+import com.codecool.quest.logic.actors.Ghost;
+import com.codecool.quest.logic.actors.Knight;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.items.Trap;
@@ -11,7 +13,7 @@ import java.util.Scanner;
 
 public class MapLoader {
     public static GameMap loadMap() {
-        InputStream is = MapLoader.class.getResourceAsStream("/map2.txt");
+        InputStream is = MapLoader.class.getResourceAsStream("/map.txt");
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
         int height = scanner.nextInt();
@@ -54,6 +56,14 @@ public class MapLoader {
                         case 'w':
                             cell.setType(CellType.FLOOR);
                             new Sword(cell, 2);
+                            break;
+                        case 'g':
+                            cell.setType(CellType.FLOOR);
+                            new Ghost(cell, 4, 4);
+                            break;
+                        case 'l':
+                            cell.setType(CellType.FLOOR);
+                            new Knight(cell, 10, 7);
                             break;
                         case 'p':
                             cell.setType(CellType.FLOOR);

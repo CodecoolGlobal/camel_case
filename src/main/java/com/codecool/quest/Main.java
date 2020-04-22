@@ -4,6 +4,7 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.actors.Cross;
+import com.codecool.quest.logic.actors.Ghost;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Potion;
@@ -124,11 +125,7 @@ public class Main extends Application {
     private void onKeyPressed(KeyEvent keyEvent) {
 
         // skeleton movement
-        List<Skeleton> skeletonList = Skeleton.getSkeletonList();
-        for (Skeleton skeleton : skeletonList) {
-            skeleton.autoMove();
-        }
-
+        autoMoveEnemies();
 
         switch (keyEvent.getCode()) {
             case UP:
@@ -218,6 +215,17 @@ public class Main extends Application {
         healthLabel.setText("Health: " + map.getPlayer().getHealth());
         swordLabel.setText("" + map.getPlayer().getSword());
         keyLabel.setText("" + map.getPlayer().getKey());
+    }
+
+    private void autoMoveEnemies(){
+        List<Skeleton> skeletonList = Skeleton.getSkeletonList();
+        for (Skeleton skeleton : skeletonList) {
+            skeleton.autoMove();
+        }
+        List<Ghost> ghostList = Ghost.getGhostList();
+        for(Ghost ghost : ghostList){
+            ghost.autoMove();
+        }
     }
 
     private int[] getPlayerCoordinates(){
