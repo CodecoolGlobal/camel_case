@@ -45,7 +45,7 @@ public class Skeleton extends Actor {
         return skeletonList;
     }
 
-    public void smartAutomove(int[] playerPos) {
+    public void smartAutoMove(int[] playerPos) {
         int steps = this.getSteps();
         int[] skeletonPos = {this.getCell().getX(), this.getCell().getY()};
         int[][] possibleCoords = {{skeletonPos[0] + steps, skeletonPos[1]}, {skeletonPos[0] - steps, skeletonPos[1]}, {skeletonPos[0], skeletonPos[1] + steps}, {skeletonPos[0], skeletonPos[1] - steps}};

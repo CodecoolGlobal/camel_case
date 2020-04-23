@@ -15,8 +15,7 @@ public class Potion extends Item {
         return healAmount;
     }
 
-    public String getTileName(){
+    public String getTileName() {
         return this.getClass().getSimpleName().toLowerCase() + this.healAmount;
     }
-
 }

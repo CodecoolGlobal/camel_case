@@ -84,16 +84,15 @@ public abstract class Actor implements Drawable {
         return null;
     }
 
-    public int getSteps(){
+    public int getSteps() {
         return this.steps;
     }
 
-    public void setSteps(int steps){
+    public void setSteps(int steps) {
         this.steps = steps;
     }
-    public String getType(){
+
+    public String getType() {
         return this.getClass().getSimpleName().toLowerCase();
     }
-
-
 }

@@ -6,16 +6,16 @@ public class Sword extends Item {
 
     private int attackDamage;
 
-    public Sword(Cell cell, int attackDamage){
+    public Sword(Cell cell, int attackDamage) {
         super(cell);
         this.setAttackDamage(attackDamage);
     }
 
-    public void setAttackDamage(int attackDamage){
+    public void setAttackDamage(int attackDamage) {
         this.attackDamage = attackDamage;
     }
 
-    public int getAttackDamage(){
+    public int getAttackDamage() {
         return this.attackDamage;
     }
 }

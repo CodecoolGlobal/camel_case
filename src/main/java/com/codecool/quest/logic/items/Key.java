@@ -8,7 +8,7 @@ public class Key extends Item {
 
     private static int counter = 0;
 
-    public Key(Cell cell){
+    public Key(Cell cell) {
         super(cell);
         this.id = counter;
         counter++;
@@ -18,11 +18,11 @@ public class Key extends Item {
         return id;
     }
 
-    public String getTileName(){
-        return this.getClass().getSimpleName().toLowerCase() + this.id;
+    static public void resetCounter() {
+        counter = 0;
     }
 
-    static public void setCounter(){
-        counter = 0;
+    public String getTileName() {
+        return this.getClass().getSimpleName().toLowerCase() + this.id;
     }
 }

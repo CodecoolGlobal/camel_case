@@ -1,7 +1,6 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,26 +14,6 @@ public class Ghost extends Actor {
         this.setAttackDamage(attackDamage);
         ghostList.add(this);
         this.setSteps(steps);
-    }
-
-    public void autoMove() {
-        String direction = Util.getRandomDirection();
-        assert direction != null;
-        switch (direction) {
-            case "UP":
-                move(0, 3, false);
-                break;
-            case "DOWN":
-                move(0, -3, false);
-                break;
-            case "LEFT":
-                move(-3, 0, false);
-                break;
-            case "RIGHT":
-                move(3, 0, false);
-                break;
-        }
-
     }
 
     public void smartAutoMove(int[] playerPos) {
@@ -58,20 +37,19 @@ public class Ghost extends Actor {
                         indexOfSmallest = i;
                     }
                 }
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
-            move(possibleSteps[indexOfSmallest][0], possibleSteps[indexOfSmallest][1], false);
+        move(possibleSteps[indexOfSmallest][0], possibleSteps[indexOfSmallest][1], false);
 
-
-        }
-
-        private double distanceBetweenPos ( int[] playerPos, int[] enemyPos){
-            return Math.sqrt(Math.pow((enemyPos[0] - playerPos[0] - 1), 2) + Math.pow((enemyPos[0] - playerPos[0] - 1), 2));
-        }
-
-        public static List<Ghost> getGhostList () {
-            return ghostList;
-        }
 
     }
+
+    private double distanceBetweenPos(int[] playerPos, int[] enemyPos) {
+        return Math.sqrt(Math.pow((enemyPos[0] - playerPos[0] - 1), 2) + Math.pow((enemyPos[0] - playerPos[0] - 1), 2));
+    }
+
+    public static List<Ghost> getGhostList() {
+        return ghostList;
+    }
+}

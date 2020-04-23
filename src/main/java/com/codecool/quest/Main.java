@@ -4,7 +4,6 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.actors.Ghost;
-import com.codecool.quest.logic.actors.Knight;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.items.*;
 import javafx.application.Application;
@@ -17,21 +16,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import jdk.jfr.EventType;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.Map;
 
 public class Main extends Application {
     GameMap map = MapLoader.loadMap("map1");
@@ -73,7 +67,7 @@ public class Main extends Application {
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
 
-        primaryStage.setTitle("Codecool Quest");
+        primaryStage.setTitle("CodeCool Quest");
         primaryStage.show();
     }
 
@@ -116,7 +110,7 @@ public class Main extends Application {
         ui.add(imageView, 0, rowIndex);
         ui.add(keyLabel, 1, rowIndex++);
         ui.add(imageView2, 0, rowIndex);
-        ui.add(swordLabel, 1, rowIndex++);
+        ui.add(swordLabel, 1, rowIndex);
     }
 
     private void setLabel(Label healthLabel) {
@@ -180,7 +174,7 @@ public class Main extends Application {
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         int windowX = 0;
         int windowY = 0;
-        outerloop:
+        outerLoop:
         for (int mapX = windowCenterCoordinates[0] - (windowWidth / 2); mapX <= windowCenterCoordinates[0] + (windowWidth / 2); mapX++) {
             for (int mapY = windowCenterCoordinates[1] - (windowHeight / 2); mapY <= windowCenterCoordinates[1] + (windowHeight / 2); mapY++) {
                 try {
@@ -206,7 +200,7 @@ public class Main extends Application {
                                     map.getPlayer().updateHealth(-trap.getDamage());
                                 } else if (cell.getItem() != null && cell.getItem().getType().equals("portal")) {
                                     setupNewMap(cell);
-                                    break outerloop;
+                                    break outerLoop;
                                 }
                             }
                         } else {
@@ -235,28 +229,12 @@ public class Main extends Application {
     }
 
     public void setupNewMap(Cell cell) {
-
-        List<Skeleton> skeletonList = Skeleton.getSkeletonList();
-        List<Ghost> ghostList = Ghost.getGhostList();
-        List<Knight> knightList = Knight.getKnightList();
-
-        for (Skeleton skeleton : skeletonList) {
-            skeleton = null;
-        }
-        for (Ghost ghost : ghostList) {
-            ghost = null;
-        }
-        for (Knight knight : knightList) {
-            knight = null;
-        }
-
+        Key.resetCounter();
         Portal portal = (Portal) cell.getItem();
         String mapName = portal.getMapName();
         MapLoader.setSavedPlayer(map.getPlayer());
-        //map.getPlayer().
         map = MapLoader.loadMap(mapName);
         refresh();
-
     }
 
     private void autoMoveEnemies() {
@@ -264,7 +242,7 @@ public class Main extends Application {
         for (Skeleton skeleton : skeletonList) {
             if (skeleton.isAlive()) {
                 int[] playerPos = {map.getPlayer().getCell().getX(), map.getPlayer().getCell().getY()};
-                skeleton.smartAutomove(playerPos);
+                skeleton.smartAutoMove(playerPos);
             }
         }
         List<Ghost> ghostList = Ghost.getGhostList();

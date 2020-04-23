@@ -14,15 +14,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Player extends Actor {
-    private int potion = 0;
     private int key = 0;
     private int sword = 0;
     private boolean godMode;
-    private String name;
-
-    public ListView<Item> getInventory() {
-        return inventory;
-    }
 
     private ListView<Item> inventory;
 
@@ -33,6 +27,10 @@ public class Player extends Actor {
         this.setAttackDamage(attackDamage);
     }
 
+    public ListView<Item> getInventory() {
+        return inventory;
+    }
+
     public void setGodMode(String name) {
         List<String> developerNames = new ArrayList<>(Arrays.asList("Edit", "Vivien", "Tomi", "Kornél"));
         this.godMode = developerNames.contains(name);
@@ -41,9 +39,9 @@ public class Player extends Actor {
     public boolean isGodMode() {
         return this.godMode;
     }
-    public void addPotionToInventory(Item item){
+
+    public void addPotionToInventory(Item item) {
         this.inventory.getItems().add(item);
-        this.potion += 1;
     }
 
     public void addKeyToInventory(Item item) {
@@ -61,30 +59,17 @@ public class Player extends Actor {
         this.setAttackDamage(this.getAttackDamage() + damageModifier);
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
 
     public int getKey() {
         return key;
     }
 
-    public void setKey(int key) {
-        this.key = key;
-    }
-
-    public void removeKey(int id){
-
+    public void removeKey(int id) {
         ObservableList<Item> itemArrayList = inventory.getItems();
-        for(Item item : inventory.getItems()){
-            if(item.getType().equals("key")){
+        for (Item item : itemArrayList) {
+            if (item.getType().equals("key")) {
                 Key key = (Key) item;
-                if(key.getId() == id){
+                if (key.getId() == id) {
                     itemArrayList.remove(key);
                 }
             }
@@ -96,18 +81,11 @@ public class Player extends Actor {
         return sword;
     }
 
-    public void setSword(int sword) {
-        this.sword = sword;
-    }
-    public int getPotion(){
-        return this.potion;
-    }
-
-    public boolean hasKey(int id){
-        for(Item item : this.inventory.getItems()){
-            if (item.getType().equals("key")){
+    public boolean hasKey(int id) {
+        for (Item item : this.inventory.getItems()) {
+            if (item.getType().equals("key")) {
                 Key key = (Key) item;
-                if(key.getId() == id){
+                if (key.getId() == id) {
                     return true;
                 }
             }
@@ -129,7 +107,7 @@ public class Player extends Actor {
                         return door;
                     }
                 }
-            } catch (NullPointerException e){
+            } catch (NullPointerException ignored) {
             }
 
         }

@@ -19,10 +19,6 @@ public class Door extends Item {
         return id;
     }
 
-    public Boolean getIsOpen() {
-        return isOpen;
-    }
-
     public void setOpen(Boolean open) {
         isOpen = open;
     }
@@ -32,5 +28,3 @@ public class Door extends Item {
         else return "closed" + this.getClass().getSimpleName();
     }
 }
-
-

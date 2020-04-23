@@ -4,7 +4,6 @@ import com.codecool.quest.logic.actors.Ghost;
 import com.codecool.quest.logic.actors.Knight;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
-import com.codecool.quest.logic.items.Trap;
 import com.codecool.quest.logic.items.*;
 import javafx.scene.control.ListView;
 
@@ -24,9 +23,7 @@ public class MapLoader {
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
         int height = scanner.nextInt();
-        int count = 0;
-        scanner.nextLine(); // empty line
-
+        scanner.nextLine();
         GameMap map = new GameMap(width, height, CellType.EMPTY);
 
         ListView<Item> inventory = new ListView<>();
@@ -59,9 +56,8 @@ public class MapLoader {
                             new Skeleton(cell, 5, 2, 1);
                             break;
                         case '@':
-                            System.out.println(savedPlayer == null);
                             cell.setType(CellType.FLOOR);
-                            if(savedPlayer != null) {
+                            if (savedPlayer != null) {
                                 map.setPlayer(new Player(cell, savedPlayer.getInventory(), savedPlayer.getHealth(), savedPlayer.getAttackDamage()));
                             } else {
                                 map.setPlayer(new Player(cell, inventory, 10, 2));
