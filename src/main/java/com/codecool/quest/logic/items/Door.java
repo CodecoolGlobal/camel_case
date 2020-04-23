@@ -6,7 +6,6 @@ import com.codecool.quest.logic.Cell;
 public class Door extends Item {
     private int id;
     private Boolean isOpen;
-
     private static int counter = 0;
 
     public Door(Cell cell) {
@@ -24,12 +23,12 @@ public class Door extends Item {
         return isOpen;
     }
 
-
     public void setOpen(Boolean open) {
         isOpen = open;
     }
-    public String getTileName(){
-        if(isOpen) return "opened" + this.getClass().getSimpleName();
+
+    public String getTileName() {
+        if (isOpen) return "opened" + this.getClass().getSimpleName();
         else return "closed" + this.getClass().getSimpleName();
     }
 }

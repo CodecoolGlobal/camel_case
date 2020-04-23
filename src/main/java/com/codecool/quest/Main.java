@@ -4,11 +4,9 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.actors.Ghost;
+import com.codecool.quest.logic.actors.Knight;
 import com.codecool.quest.logic.actors.Skeleton;
-import com.codecool.quest.logic.items.Door;
-import com.codecool.quest.logic.items.Potion;
-import com.codecool.quest.logic.items.Sword;
-import com.codecool.quest.logic.items.Trap;
+import com.codecool.quest.logic.items.*;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -19,19 +17,23 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import jdk.jfr.EventType;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.List;
 
 public class Main extends Application {
-    GameMap map = MapLoader.loadMap();
+    GameMap map = MapLoader.loadMap("map1");
     int windowWidth = 20;
     int windowHeight = 20;
     Canvas canvas = new Canvas(windowWidth * Tiles.TILE_WIDTH, windowHeight * Tiles.TILE_WIDTH);
@@ -152,9 +154,9 @@ public class Main extends Application {
         autoMoveEnemies();
     }
 
-    private void handleOpenDoor(){
+    private void handleOpenDoor() {
         Door door = map.getPlayer().openDoor();
-        if(door != null){
+        if (door != null) {
             refresh();
         }
     }
@@ -171,13 +173,17 @@ public class Main extends Application {
     }
 
     private void refresh() {
+        System.out.println(map.getPlayer().getCell().getX() + " " +map.getPlayer().getCell().getY());
         int[] windowCenterCoordinates = getPlayerCoordinates();
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         int windowX = 0;
         int windowY = 0;
+        outerloop:
         for (int mapX = windowCenterCoordinates[0] - (windowWidth / 2); mapX <= windowCenterCoordinates[0] + (windowWidth / 2); mapX++) {
             for (int mapY = windowCenterCoordinates[1] - (windowHeight / 2); mapY <= windowCenterCoordinates[1] + (windowHeight / 2); mapY++) {
+                System.out.println("windowX: " +  windowX + " windowY: " + windowY);
+                System.out.println("mapX: " +  mapX + " mapY: " + mapY);
                 try {
                     Cell cell = map.getCell(mapX, mapY);
                     if (cell.getActor() != null) {
@@ -199,6 +205,9 @@ public class Main extends Application {
                                 } else if (cell.getItem() != null && cell.getItem().getType().equals("trap")) {
                                     Trap trap = (Trap) cell.getItem();
                                     map.getPlayer().updateHealth(-trap.getDamage());
+                                } else if (cell.getItem() != null && cell.getItem().getType().equals("portal")) {
+                                    setupNewMap(cell);
+                                    break outerloop;
                                 }
                             }
                         } else {
@@ -226,19 +235,42 @@ public class Main extends Application {
         keyLabel.setText("" + map.getPlayer().getKey());
     }
 
-    private void autoMoveEnemies(){
+    public void setupNewMap(Cell cell) {
+
+        List<Skeleton> skeletonList = Skeleton.getSkeletonList();
+        List<Ghost> ghostList = Ghost.getGhostList();
+        List<Knight> knightList = Knight.getKnightList();
+
+        for (Skeleton skeleton : skeletonList) {
+            skeleton = null;
+        }
+        for (Ghost ghost : ghostList) {
+            ghost = null;
+        }
+        for (Knight knight : knightList) {
+            knight = null;
+        }
+
+        Portal portal = (Portal) cell.getItem();
+        String mapName = portal.getMapName();
+        map = MapLoader.loadMap(mapName);
+        refresh();
+
+    }
+
+    private void autoMoveEnemies() {
         List<Skeleton> skeletonList = Skeleton.getSkeletonList();
         for (Skeleton skeleton : skeletonList) {
             if (skeleton.isAlive()) {
-                int[] playerPos = {map.getPlayer().getCell().getX(),map.getPlayer().getCell().getY()};
+                int[] playerPos = {map.getPlayer().getCell().getX(), map.getPlayer().getCell().getY()};
                 skeleton.smartAutomove(playerPos);
             }
         }
         List<Ghost> ghostList = Ghost.getGhostList();
         for (Ghost ghost : ghostList) {
             if (ghost.isAlive()) {
-                int[] playerPos = {map.getPlayer().getCell().getX(),map.getPlayer().getCell().getY()};
-                ghost.smartAutomove(playerPos);
+                int[] playerPos = {map.getPlayer().getCell().getX(), map.getPlayer().getCell().getY()};
+                ghost.smartAutoMove(playerPos);
             }
         }
     }

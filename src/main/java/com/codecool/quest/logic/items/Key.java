@@ -21,4 +21,8 @@ public class Key extends Item {
     public String getTileName(){
         return this.getClass().getSimpleName().toLowerCase() + this.id;
     }
+
+    static public void setCounter(){
+        counter = 0;
+    }
 }

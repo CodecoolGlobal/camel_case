@@ -106,7 +106,6 @@ public class Player extends Actor {
                     if (hasKey(door.getId())) {
                         this.getCell().getNeighbor(modifier[0], modifier[1]).setType(CellType.FLOOR);
                         door.setOpen(true);
-                        this.inventory.
                         return door;
                     }
                 }

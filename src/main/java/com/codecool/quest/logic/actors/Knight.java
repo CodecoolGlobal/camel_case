@@ -18,7 +18,7 @@ public class Knight extends Actor{
 
 
 
-    public static List<Knight> getGhostList() {
+    public static List<Knight> getKnightList() {
         return knightList;
     }
 }
