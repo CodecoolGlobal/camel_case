@@ -6,7 +6,8 @@ public enum CellType {
     WALL("wall"),
     WINDOW ("window"),
     BUSH("bush"),
-    GREENBUSH("greenBush");
+    GREENBUSH("greenBush"),
+    CROWN("crown");
 
     private final String tileName;
 
