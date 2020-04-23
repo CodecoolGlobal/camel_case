@@ -57,7 +57,7 @@ public class MapLoader {
                             break;
                         case 'k':
                             cell.setType(CellType.FLOOR);
-                            new Key(cell, count++);
+                            new Key(cell);
                             break;
                         case 'w':
                             cell.setType(CellType.FLOOR);
@@ -79,7 +79,10 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             new Trap(cell, 1);
                             break;
-
+                        case 'd':
+                            cell.setType(CellType.WALL);
+                            new Door(cell);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }

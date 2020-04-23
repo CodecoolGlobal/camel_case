@@ -5,6 +5,7 @@ import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.actors.Ghost;
 import com.codecool.quest.logic.actors.Skeleton;
+import com.codecool.quest.logic.items.Door;
 import com.codecool.quest.logic.items.Potion;
 import com.codecool.quest.logic.items.Sword;
 import com.codecool.quest.logic.items.Trap;
@@ -143,9 +144,19 @@ public class Main extends Application {
                     handleAttack();
                     refresh();
                     break;
+                case E:
+                    handleOpenDoor();
+                    break;
             }
         }
         autoMoveEnemies();
+    }
+
+    private void handleOpenDoor(){
+        Door door = map.getPlayer().openDoor();
+        if(door != null){
+            refresh();
+        }
     }
 
     private void handleAttack() {

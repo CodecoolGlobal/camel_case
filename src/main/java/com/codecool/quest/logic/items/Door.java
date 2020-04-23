@@ -4,14 +4,33 @@ import com.codecool.quest.logic.Cell;
 
 
 public class Door extends Item {
-    public int id;
-    public Boolean isOpen;
+    private int id;
+    private Boolean isOpen;
 
-    public Door(Cell cell, int id){
+    private static int counter = 0;
 
-       super(cell);
-        this.id = id;
+    public Door(Cell cell) {
+        super(cell);
+        this.id = counter;
+        counter++;
         isOpen = false;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Boolean getIsOpen() {
+        return isOpen;
+    }
+
+
+    public void setOpen(Boolean open) {
+        isOpen = open;
+    }
+    public String getTileName(){
+        if(isOpen) return "opened" + this.getClass().getSimpleName();
+        else return "closed" + this.getClass().getSimpleName();
     }
 }
 

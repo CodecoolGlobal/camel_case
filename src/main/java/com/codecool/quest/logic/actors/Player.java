@@ -1,8 +1,12 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.CellType;
+import com.codecool.quest.logic.items.Door;
 import com.codecool.quest.logic.items.Item;
+import com.codecool.quest.logic.items.Key;
 import com.codecool.quest.logic.items.Sword;
+import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 
 import java.util.ArrayList;
@@ -80,4 +84,36 @@ public class Player extends Actor {
         return this.potion;
     }
 
+    public boolean hasKey(int id){
+        for(Item item : this.inventory.getItems()){
+            if (item.getType().equals("key")){
+                Key key = (Key) item;
+                if(key.getId() == id){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    public Door openDoor() {
+        int[][] coordinateModifiers = {{0, 1}, {1, 0}, {-1, 0}, {0, -1}};
+        for (int[] modifier : coordinateModifiers) {
+            try {
+                if (this.getCell().getNeighbor(modifier[0], modifier[1]).getItem().getType().equals("door")) {
+                    Door door = (Door) this.getCell().getNeighbor(modifier[0], modifier[1]).getItem();
+                    if (hasKey(door.getId())) {
+                        this.getCell().getNeighbor(modifier[0], modifier[1]).setType(CellType.FLOOR);
+                        door.setOpen(true);
+                        this.inventory.
+                        return door;
+                    }
+                }
+            } catch (NullPointerException e){
+            }
+
+        }
+        return null;
+    }
 }

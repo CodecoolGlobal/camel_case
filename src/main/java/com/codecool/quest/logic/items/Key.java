@@ -4,11 +4,18 @@ import com.codecool.quest.logic.Cell;
 
 
 public class Key extends Item {
-    int id;
+    private int id;
 
-    public Key(Cell cell, int id){
+    private static int counter = 0;
+
+    public Key(Cell cell){
         super(cell);
-        this.id = id;
+        this.id = counter;
+        counter++;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTileName(){
