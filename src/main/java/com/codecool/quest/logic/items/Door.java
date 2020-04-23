@@ -10,8 +10,7 @@ public class Door extends Item {
 
     public Door(Cell cell) {
         super(cell);
-        this.id = counter;
-        counter++;
+        this.id = counter++;
         isOpen = false;
     }
 

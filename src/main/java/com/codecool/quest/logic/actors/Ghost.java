@@ -18,11 +18,8 @@ public class Ghost extends Actor {
 
     public void smartAutoMove(int[] playerPos) {
         int steps = this.getSteps();
-
         int[] skeletonPos = {this.getCell().getX(), this.getCell().getY()};
-
         int[][] possibleCoords = {{skeletonPos[0] + steps, skeletonPos[1]}, {skeletonPos[0] - steps, skeletonPos[1]}, {skeletonPos[0], skeletonPos[1] + steps}, {skeletonPos[0], skeletonPos[1] - steps}};
-
         int[][] possibleSteps = {{steps, 0}, {-steps, 0}, {0, steps}, {0, -steps}};
 
         double min = 9999;

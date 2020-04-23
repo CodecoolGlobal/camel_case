@@ -191,7 +191,6 @@ public class Main extends Application {
                                     map.getPlayer().addKeyToInventory(cell.getItem());
                                     cell.setItem(null);
                                 } else if (cell.getItem() != null && cell.getItem().getType().equals("potion")) {
-                                    map.getPlayer().addPotionToInventory(cell.getItem());
                                     Potion healthPotion = (Potion) cell.getItem();
                                     map.getPlayer().updateHealth(healthPotion.getHealAmount());
                                     cell.setItem(null);
@@ -229,7 +228,6 @@ public class Main extends Application {
     }
 
     public void setupNewMap(Cell cell) {
-        Key.resetCounter();
         Portal portal = (Portal) cell.getItem();
         String mapName = portal.getMapName();
         MapLoader.setSavedPlayer(map.getPlayer());

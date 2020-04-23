@@ -10,19 +10,14 @@ public class Key extends Item {
 
     public Key(Cell cell) {
         super(cell);
-        this.id = counter;
-        counter++;
+        this.id = counter++;
     }
 
     public int getId() {
         return id;
     }
 
-    static public void resetCounter() {
-        counter = 0;
-    }
-
     public String getTileName() {
-        return this.getClass().getSimpleName().toLowerCase() + this.id;
+        return this.getClass().getSimpleName().toLowerCase() + this.id % 2;
     }
 }

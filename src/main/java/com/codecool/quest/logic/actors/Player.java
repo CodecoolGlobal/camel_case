@@ -14,8 +14,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Player extends Actor {
-    private int key = 0;
-    private int sword = 0;
     private boolean godMode;
 
     private ListView<Item> inventory;
@@ -40,18 +38,12 @@ public class Player extends Actor {
         return this.godMode;
     }
 
-    public void addPotionToInventory(Item item) {
-        this.inventory.getItems().add(item);
-    }
-
     public void addKeyToInventory(Item item) {
         this.inventory.getItems().add(item);
-        this.key += 1;
     }
 
     public void addWeaponToInventory(Sword sword) {
         this.inventory.getItems().add(sword);
-        this.sword += 1;
         updateAttackDamage(sword.getAttackDamage());
     }
 
@@ -61,24 +53,40 @@ public class Player extends Actor {
 
 
     public int getKey() {
-        return key;
+        int count = 0;
+        for (Item item : this.inventory.getItems()) {
+            if (item.getType().equals("key")) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public void removeKey(int id) {
         ObservableList<Item> itemArrayList = inventory.getItems();
+        inventory = new ListView<>();
         for (Item item : itemArrayList) {
+            System.out.println(item.getType());
             if (item.getType().equals("key")) {
                 Key key = (Key) item;
-                if (key.getId() == id) {
-                    itemArrayList.remove(key);
+                if (key.getId() != id) {
+                    this.addKeyToInventory(item);
                 }
+            } else {
+                Sword sword = (Sword) item;
+                this.addWeaponToInventory(sword);
             }
         }
-        inventory.setItems(itemArrayList);
     }
 
     public int getSword() {
-        return sword;
+        int count = 0;
+        for (Item item : this.inventory.getItems()) {
+            if (item.getType().equals("sword")) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public boolean hasKey(int id) {
