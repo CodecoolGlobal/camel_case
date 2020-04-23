@@ -19,6 +19,11 @@ public class Player extends Actor {
     private int sword = 0;
     private boolean godMode;
     private String name;
+
+    public ListView<Item> getInventory() {
+        return inventory;
+    }
+
     private ListView<Item> inventory;
 
     public Player(Cell cell, ListView<Item> inventory, int health, int attackDamage) {
@@ -73,6 +78,20 @@ public class Player extends Actor {
         this.key = key;
     }
 
+    public void removeKey(int id){
+
+        ObservableList<Item> itemArrayList = inventory.getItems();
+        for(Item item : inventory.getItems()){
+            if(item.getType().equals("key")){
+                Key key = (Key) item;
+                if(key.getId() == id){
+                    itemArrayList.remove(key);
+                }
+            }
+        }
+        inventory.setItems(itemArrayList);
+    }
+
     public int getSword() {
         return sword;
     }
@@ -106,6 +125,7 @@ public class Player extends Actor {
                     if (hasKey(door.getId())) {
                         this.getCell().getNeighbor(modifier[0], modifier[1]).setType(CellType.FLOOR);
                         door.setOpen(true);
+
                         return door;
                     }
                 }

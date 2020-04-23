@@ -52,14 +52,13 @@ public class Ghost extends Actor {
 
         for (int i = 0; i < possibleSteps.length; i++) {
             try {
-                if (this.getCell().getNeighbor(possibleSteps[i][0], possibleSteps[i][1]).getActor() == null) {
+                if (this.getCell().getNeighbor(possibleSteps[i][0], possibleSteps[i][1]).getActor() == null && !this.getCell().getNeighbor(possibleSteps[i][0], possibleSteps[i][1]).getTileName().equals("WALL")) {
                     if (distanceBetweenPos(possibleCoords[i], playerPos) < min || min == 0) {
                         min = distanceBetweenPos(possibleCoords[i], playerPos);
                         indexOfSmallest = i;
                     }
                 }
             } catch (Exception e) {
-                System.out.println(e.getMessage());
             }
         }
             move(possibleSteps[indexOfSmallest][0], possibleSteps[indexOfSmallest][1], false);

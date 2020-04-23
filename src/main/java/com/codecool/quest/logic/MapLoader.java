@@ -12,9 +12,15 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class MapLoader {
+    static private Player savedPlayer = null;
+
+    public static void setSavedPlayer(Player player) {
+        savedPlayer = player;
+    }
+
     public static GameMap loadMap(String mapName) {
         InputStream is = MapLoader.class.getResourceAsStream("/" + mapName + ".txt");
-        boolean firstMap = true;
+
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
         int height = scanner.nextInt();
@@ -53,13 +59,12 @@ public class MapLoader {
                             new Skeleton(cell, 5, 2, 1);
                             break;
                         case '@':
+                            System.out.println(savedPlayer == null);
                             cell.setType(CellType.FLOOR);
-                            if (firstMap) {
-                                map.setPlayer(new Player(cell, inventory, 10, 2));
-                                firstMap = false;
+                            if(savedPlayer != null) {
+                                map.setPlayer(new Player(cell, savedPlayer.getInventory(), savedPlayer.getHealth(), savedPlayer.getAttackDamage()));
                             } else {
-                                map.getPlayer().setCell(cell);
-                                map.setPlayer(map.getPlayer());
+                                map.setPlayer(new Player(cell, inventory, 10, 2));
                             }
                             break;
                         case 'k':

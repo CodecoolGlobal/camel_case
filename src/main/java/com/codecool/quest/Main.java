@@ -31,6 +31,7 @@ import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Map;
 
 public class Main extends Application {
     GameMap map = MapLoader.loadMap("map1");
@@ -158,6 +159,7 @@ public class Main extends Application {
         Door door = map.getPlayer().openDoor();
         if (door != null) {
             refresh();
+            map.getPlayer().removeKey(door.getId());
         }
     }
 
@@ -173,7 +175,6 @@ public class Main extends Application {
     }
 
     private void refresh() {
-        System.out.println(map.getPlayer().getCell().getX() + " " +map.getPlayer().getCell().getY());
         int[] windowCenterCoordinates = getPlayerCoordinates();
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -182,8 +183,6 @@ public class Main extends Application {
         outerloop:
         for (int mapX = windowCenterCoordinates[0] - (windowWidth / 2); mapX <= windowCenterCoordinates[0] + (windowWidth / 2); mapX++) {
             for (int mapY = windowCenterCoordinates[1] - (windowHeight / 2); mapY <= windowCenterCoordinates[1] + (windowHeight / 2); mapY++) {
-                System.out.println("windowX: " +  windowX + " windowY: " + windowY);
-                System.out.println("mapX: " +  mapX + " mapY: " + mapY);
                 try {
                     Cell cell = map.getCell(mapX, mapY);
                     if (cell.getActor() != null) {
@@ -253,6 +252,8 @@ public class Main extends Application {
 
         Portal portal = (Portal) cell.getItem();
         String mapName = portal.getMapName();
+        MapLoader.setSavedPlayer(map.getPlayer());
+        //map.getPlayer().
         map = MapLoader.loadMap(mapName);
         refresh();
 
