@@ -15,7 +15,6 @@ public abstract class Actor implements Drawable {
         this.cell.setActor(this);
     }
 
-
     public boolean isAlive() {
         return isAlive;
     }

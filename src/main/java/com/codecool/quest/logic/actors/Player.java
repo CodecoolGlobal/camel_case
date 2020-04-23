@@ -15,6 +15,7 @@ import java.util.List;
 
 public class Player extends Actor {
     private boolean godMode;
+    private String name;
 
     private ListView<Item> inventory;
 
@@ -29,7 +30,11 @@ public class Player extends Actor {
         return inventory;
     }
 
+    public String getName() {
+        return name;
+    }
     public void setGodMode(String name) {
+        this.name = name;
         List<String> developerNames = new ArrayList<>(Arrays.asList("Edit", "Vivien", "Tomi", "Kornél"));
         this.godMode = developerNames.contains(name);
     }

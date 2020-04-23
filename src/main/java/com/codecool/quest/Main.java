@@ -3,6 +3,7 @@ package com.codecool.quest;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
+import com.codecool.quest.logic.items.Cross;
 import com.codecool.quest.logic.actors.Ghost;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.items.*;
@@ -145,6 +146,12 @@ public class Main extends Application {
                     handleOpenDoor();
                     break;
             }
+        } else {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException ignored) {
+            }
+            System.exit(1);
         }
         autoMoveEnemies();
     }
@@ -202,6 +209,12 @@ public class Main extends Application {
                                     break outerLoop;
                                 }
                             }
+                        } else if (cell.getActor().getType().equals("player")){
+                            map.getPlayer().setAlive(false);
+                            cell.setActor(null);
+                            cell.setItem(new Cross(cell));
+                            Tiles.drawTile(context, cell, windowX, windowY++);
+                            refresh();
                         } else {
                             cell.getActor().setAlive(false);
                             cell.setActor(null);

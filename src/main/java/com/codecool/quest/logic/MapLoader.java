@@ -58,7 +58,9 @@ public class MapLoader {
                         case '@':
                             cell.setType(CellType.FLOOR);
                             if (savedPlayer != null) {
-                                map.setPlayer(new Player(cell, savedPlayer.getInventory(), savedPlayer.getHealth(), savedPlayer.getAttackDamage()));
+                                Player player = new Player(cell, savedPlayer.getInventory(), savedPlayer.getHealth(), savedPlayer.getAttackDamage());
+                                player.setGodMode(savedPlayer.getName());
+                                map.setPlayer(player);
                             } else {
                                 map.setPlayer(new Player(cell, inventory, 10, 2));
                             }
